@@ -1,8 +1,8 @@
 <?php
-/** Contact page — quote form (demo-only) + NAP + hours + map. */
+/** Contact page — quote form (demo-only) + NAP + hours + what-happens-next. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 get_header();
-set_query_var( 'hero', array( 'eyebrow' => 'Contact', 'title' => 'Request your free estimate', 'lead' => 'Tell us about your project and we\'ll get right back to you. Prefer to talk? Call us during business hours.' ) );
+set_query_var( 'hero', array( 'eyebrow' => 'Contact', 'title' => 'Get Your Free Insulation Estimate', 'lead' => 'Tell us about your project and we\'ll get right back to you — with a written, itemized number. Prefer to talk? Call us during business hours.' ) );
 get_template_part( 'template-parts/page-hero' );
 $services = new WP_Query( array( 'post_type' => 'service', 'posts_per_page' => -1, 'orderby' => 'menu_order', 'order' => 'ASC' ) );
 ?>
@@ -12,17 +12,17 @@ $services = new WP_Query( array( 'post_type' => 'service', 'posts_per_page' => -
 			<form class="card p-7" x-data="{ sent: false }" @submit.prevent="sent = true">
 				<div x-show="!sent" class="grid gap-5">
 					<div class="grid gap-5 sm:grid-cols-2">
-						<label class="block text-sm"><span class="font-medium">Name</span><input type="text" name="name" required class="mt-1.5 w-full rounded border border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></label>
-						<label class="block text-sm"><span class="font-medium">Phone</span><input type="tel" name="phone" required class="mt-1.5 w-full rounded border border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></label>
+						<label class="block text-sm"><span class="font-bold">Name</span><input type="text" name="name" required class="mt-1.5 w-full rounded border-2 border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></label>
+						<label class="block text-sm"><span class="font-bold">Phone</span><input type="tel" name="phone" required class="mt-1.5 w-full rounded border-2 border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></label>
 					</div>
-					<label class="block text-sm"><span class="font-medium">Email</span><input type="email" name="email" class="mt-1.5 w-full rounded border border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></label>
-					<label class="block text-sm"><span class="font-medium">Service needed</span>
-						<select name="service" class="mt-1.5 w-full rounded border border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none">
+					<label class="block text-sm"><span class="font-bold">Email</span><input type="email" name="email" class="mt-1.5 w-full rounded border-2 border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></label>
+					<label class="block text-sm"><span class="font-bold">Service needed</span>
+						<select name="service" class="mt-1.5 w-full rounded border-2 border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none">
 							<option value="">Not sure yet</option>
 							<?php while ( $services->have_posts() ) : $services->the_post(); ?><option><?php the_title(); ?></option><?php endwhile; wp_reset_postdata(); ?>
 						</select>
 					</label>
-					<label class="block text-sm"><span class="font-medium">Project details</span><textarea name="message" rows="4" class="mt-1.5 w-full rounded border border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></textarea></label>
+					<label class="block text-sm"><span class="font-bold">Project details</span><textarea name="message" rows="4" class="mt-1.5 w-full rounded border-2 border-line bg-bg px-3 py-2.5 focus:border-accent focus:outline-none"></textarea></label>
 					<button type="submit" class="btn btn-primary w-full sm:w-auto">Request Free Estimate</button>
 					<p class="text-xs text-muted">This is a demo form — submissions aren't delivered yet.</p>
 				</div>
@@ -40,6 +40,28 @@ $services = new WP_Query( array( 'post_type' => 'service', 'posts_per_page' => -
 				<?php if ( sdp_has_hours() ) : ?><div class="card p-5"><dt class="eyebrow">Hours</dt><dd class="mt-2 space-y-1 text-sm"><?php foreach ( sdp_hours() as $r ) : ?><div class="flex justify-between gap-4 text-muted"><span><?php echo esc_html( $r['day'] ); ?></span><span class="stat"><?php echo esc_html( $r['time'] ); ?></span></div><?php endforeach; ?></dd></div><?php endif; ?>
 			</dl>
 		</aside>
+	</div>
+</section>
+
+<section class="border-t-2 border-line bg-surface px-5 py-16 lg:px-8 lg:py-20">
+	<div class="mx-auto max-w-6xl">
+		<span class="eyebrow" data-reveal>What to expect</span>
+		<h2 class="marker mt-3 text-2xl font-black uppercase tracking-tight sm:text-3xl" data-reveal>What happens after you hit send</h2>
+		<div class="mt-10 grid gap-4 sm:grid-cols-3">
+			<?php
+			$steps = array(
+				array( 'n' => '1', 't' => 'We call you back', 'd' => 'We call you back within one business day.' ),
+				array( 'n' => '2', 't' => 'Free attic assessment', 'd' => 'We schedule your free attic assessment.' ),
+				array( 'n' => '3', 't' => 'A written number', 'd' => 'You get a written, itemized estimate — no pressure, no obligation.' ),
+			);
+			foreach ( $steps as $s ) : ?>
+				<div class="card p-6" data-reveal>
+					<span class="stat text-5xl text-cta"><?php echo esc_html( $s['n'] ); ?></span>
+					<h3 class="mt-3 font-bold uppercase tracking-wide"><?php echo esc_html( $s['t'] ); ?></h3>
+					<p class="mt-1.5 text-sm text-muted"><?php echo esc_html( $s['d'] ); ?></p>
+				</div>
+			<?php endforeach; ?>
+		</div>
 	</div>
 </section>
 <?php get_footer();
