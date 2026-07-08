@@ -865,13 +865,7 @@ get_template_part( 'template-parts/page-hero' );
 <?php get_footer();
 ```
 
-- [ ] **Step 4: Give the About page body copy** (so `the_content()` isn't empty)
-
-Run:
-```
-wsl -d Ubuntu -- bash -lc 'docker compose -f /home/cody/workspace/sandbox/aplusinsulation/docker-compose.yml exec -T -e HTTP_HOST=localhost cli wp post update $(docker compose -f /home/cody/workspace/sandbox/aplusinsulation/docker-compose.yml exec -T -e HTTP_HOST=localhost cli wp post list --post_type=page --name=about --field=ID </dev/null | head -1) --post_content="<p>A Plus Insulation is a family-owned insulation contractor based in Marianna, Florida. Since 2006 we have helped homeowners and builders across Jackson County and the Panhandle make their homes more comfortable and far more efficient.</p><p>We install every major type of insulation — spray foam, blown-in, batt and roll, and radiant barrier — and we handle removal and replacement of old or damaged material. Whatever the project, we show up on time, do clean work, and stand behind it.</p>" </dev/null'
-```
-Expected: `Success: Updated post <id>.`
+- [ ] **Step 4: Give the About page body copy** — set in `bin/seed.sh` (capture `ABOUT_ID=$(page about "About")` and `wp post update "$ABOUT_ID" --post_content='<p>…</p>'`), so it is reproducible on every seed rather than a one-off inline command (which the WSL bridge would mangle via `$(...)`). Re-run `bash /home/cody/workspace/sandbox/aplusinsulation/bin/seed.sh`.
 
 - [ ] **Step 5: Verify both pages**
 

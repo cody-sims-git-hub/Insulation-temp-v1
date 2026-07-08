@@ -22,9 +22,10 @@ page() { # slug title
 }
 HOME_ID=$(page home "Home")
 page services "Services" >/dev/null
-page about "About" >/dev/null
+ABOUT_ID=$(page about "About")
 page service-area "Service Area" >/dev/null
 page contact "Contact" >/dev/null
+wp post update "$ABOUT_ID" --post_status=publish --post_content='<p>A Plus Insulation is a family-owned insulation contractor based in Marianna, Florida. Since 2006 we have helped homeowners and builders across Jackson County and the Panhandle make their homes more comfortable and far more efficient.</p><p>We install every major type of insulation — spray foam, blown-in, batt and roll, and radiant barrier — and we handle removal and replacement of old or damaged material. Whatever the project, we show up on time, do clean work, and stand behind it.</p>' >/dev/null
 wp option update show_on_front page >/dev/null
 wp option update page_on_front "$HOME_ID" >/dev/null
 wp option update page_for_posts 0 >/dev/null
