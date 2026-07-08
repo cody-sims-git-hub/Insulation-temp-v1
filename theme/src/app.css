@@ -5,30 +5,32 @@
 
 /*
 |--------------------------------------------------------------------------
-| DESIGN TOKENS — A Plus Insulation (Swiss / eco). Re-skin here.
+| DESIGN TOKENS — A Plus Insulation (Trades Workhorse: warmed-up flat).
+| Type carries the personality: Archivo display caps + Public Sans body.
+| Flat 2.0 — solid fills, 2px borders, no gradients, no shadows.
+| Re-skin here.
 |--------------------------------------------------------------------------
 */
 @theme {
-	--font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
-	--font-display: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
-	--font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+	--font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
 
-	--color-bg: #faf8f3;          /* warm oat */
-	--color-surface: #f1ede4;
-	--color-surface-2: #e7e1d4;
-	--color-ink: #1b2a20;         /* deep pine */
-	--color-muted: #55635a;
-	--color-line: #ddd6c7;
+	--color-bg: #faf7f0;          /* warm paper */
+	--color-surface: #f1ecdf;
+	--color-surface-2: #e8e1cf;
+	--color-ink: #20241f;         /* charcoal */
+	--color-muted: #575e53;
+	--color-line: #d9d2c0;
 
-	--color-accent: #2f5d3a;      /* pine green — brand */
-	--color-accent-hover: #264b2f;
-	--color-accent-ink: #ffffff;
+	--color-accent: #245032;      /* pine green — solid section bands */
+	--color-accent-hover: #1c4028;
+	--color-accent-ink: #f6f3ea;
 
-	--color-cta: #bd5f30;         /* warm clay — primary action */
-	--color-cta-hover: #a45028;
-	--color-cta-ink: #ffffff;
+	--color-cta: #f7a800;         /* safety amber — actions & key numerals only */
+	--color-cta-hover: #e29700;
+	--color-cta-ink: #20241f;     /* dark-on-amber holds AA */
 
-	--radius: 0.25rem;            /* sharp (Swiss) */
+	--radius: 0.125rem;
 	--ease-out-cubic: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -42,51 +44,64 @@
 		font-family: var(--font-sans);
 	}
 
-	::selection { background-color: var(--color-accent); color: var(--color-accent-ink); }
+	::selection { background-color: var(--color-cta); color: var(--color-cta-ink); }
 	:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 2px; }
 
 	h1, h2, h3, h4 {
 		font-family: var(--font-display);
-		font-weight: 700;
-		line-height: 1.05;
-		letter-spacing: -0.015em;
+		font-weight: 800;
+		line-height: 1.02;
+		letter-spacing: -0.01em;
 	}
 }
 
 @layer components {
 	.eyebrow {
-		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.16em;
+		font-family: var(--font-display);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
 		text-transform: uppercase;
 		color: var(--color-accent);
 	}
 
-	/* Stat / numeral emphasis (R-values, years, counts). */
-	.stat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+	/* Big-numeral emphasis (years, R-values, prices) — Archivo Black. */
+	.stat {
+		font-family: var(--font-display);
+		font-weight: 900;
+		letter-spacing: -0.02em;
+		font-variant-numeric: tabular-nums;
+	}
+
+	/* Amber marker underline for display headings. */
+	.marker::after {
+		content: '';
+		display: block;
+		width: 3.5rem;
+		height: 0.4rem;
+		margin-top: 0.9rem;
+		background: var(--color-cta);
+	}
 
 	.btn {
 		display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-		padding: 0.8rem 1.6rem; border-radius: var(--radius);
-		font-weight: 600; font-size: 0.95rem;
-		transition: all 0.2s var(--ease-out-cubic);
+		padding: 0.85rem 1.7rem; border-radius: var(--radius);
+		font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.01em;
+		transition: background-color 0.15s var(--ease-out-cubic), border-color 0.15s var(--ease-out-cubic), color 0.15s var(--ease-out-cubic);
 	}
 	.btn-primary { background: var(--color-cta); color: var(--color-cta-ink); }
-	.btn-primary:hover { background: var(--color-cta-hover); transform: translateY(-1px); }
-	.btn-ghost { border: 1px solid var(--color-line); color: var(--color-ink); }
-	.btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
-	/* On the green CTA band. */
-	.btn-onaccent { background: var(--color-accent-ink); color: var(--color-accent); }
-	.btn-onaccent:hover { transform: translateY(-1px); }
+	.btn-primary:hover { background: var(--color-cta-hover); }
+	.btn-ghost { border: 2px solid var(--color-ink); color: var(--color-ink); }
+	.btn-ghost:hover { background: var(--color-ink); color: var(--color-bg); }
+	/* On dark bands (charcoal / pine). */
+	.btn-onaccent { background: var(--color-bg); color: var(--color-ink); }
+	.btn-onaccent:hover { background: var(--color-surface-2); }
 
 	.card {
 		background: var(--color-bg);
-		border: 1px solid var(--color-line);
+		border: 2px solid var(--color-line);
 		border-radius: var(--radius);
-		transition: box-shadow 0.2s var(--ease-out-cubic), transform 0.2s var(--ease-out-cubic);
 	}
-	.card:hover { box-shadow: 0 12px 32px -12px rgba(27, 42, 32, 0.18); transform: translateY(-2px); }
 
 	.prose-sdp { color: var(--color-ink); font-size: 1.075rem; line-height: 1.75; }
 	.prose-sdp > * + * { margin-top: 1.4em; }
@@ -95,8 +110,8 @@
 	.prose-sdp a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
 	.prose-sdp ul { list-style: disc; padding-left: 1.4em; }
 	.prose-sdp ol { list-style: decimal; padding-left: 1.4em; }
-	.prose-sdp blockquote { border-left: 3px solid var(--color-accent); padding-left: 1.25em; color: var(--color-muted); }
-	.prose-sdp img { width: 100%; border-radius: var(--radius); }
+	.prose-sdp blockquote { border-left: 3px solid var(--color-cta); padding-left: 1.25em; color: var(--color-muted); }
+	.prose-sdp img { width: 100%; border-radius: var(--radius); border: 2px solid var(--color-line); }
 }
 
 .has-js [data-reveal] {
