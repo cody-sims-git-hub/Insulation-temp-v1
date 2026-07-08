@@ -6,7 +6,7 @@ $socials = sdp_socials();
 ?>
 </main>
 
-<footer class="border-t border-line bg-surface">
+<footer class="border-t-2 border-line bg-surface">
 	<div class="mx-auto max-w-6xl px-5 py-16 lg:px-8">
 		<div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
 			<div>
@@ -15,7 +15,7 @@ $socials = sdp_socials();
 				<?php if ( $socials ) : ?>
 					<div class="mt-5 flex gap-3">
 						<?php foreach ( $socials as $net => $url ) : ?>
-							<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener" class="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent" aria-label="<?php echo esc_attr( ucfirst( $net ) ); ?>"><?php echo sdp_icon( $net ); ?></a>
+							<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener" class="flex h-9 w-9 items-center justify-center rounded border-2 border-line text-muted transition-colors hover:border-accent hover:text-accent" aria-label="<?php echo esc_attr( ucfirst( $net ) ); ?>"><?php echo sdp_icon( $net ); ?></a>
 						<?php endforeach; ?>
 					</div>
 				<?php endif; ?>

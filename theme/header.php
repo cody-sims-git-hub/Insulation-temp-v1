@@ -26,7 +26,7 @@ $logo      = SDP_URI . '/assets/logo.jpg';
 </a>
 
 <div x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 20">
-	<header :class="scrolled ? 'border-line bg-bg/90 backdrop-blur' : 'border-transparent'" class="fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300">
+	<header :class="scrolled ? 'border-line' : 'border-transparent'" class="fixed inset-x-0 top-0 z-40 border-b-2 bg-bg transition-colors duration-300">
 		<div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 lg:px-8">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> home">
 				<img src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="h-12 w-auto rounded">
@@ -34,7 +34,7 @@ $logo      = SDP_URI . '/assets/logo.jpg';
 
 			<nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
 				<?php foreach ( $nav as $item ) : ?>
-					<a href="<?php echo esc_url( $item['url'] ); ?>" class="text-sm font-medium text-muted transition-colors hover:text-ink"><?php echo esc_html( $item['label'] ); ?></a>
+					<a href="<?php echo esc_url( $item['url'] ); ?>" class="text-sm font-semibold text-ink transition-colors hover:text-accent"><?php echo esc_html( $item['label'] ); ?></a>
 				<?php endforeach; ?>
 			</nav>
 
