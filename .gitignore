@@ -1,0 +1,17 @@
+# Node / build
+theme/node_modules/
+theme/dist/
+
+# Local browser automation artifacts
+.playwright-mcp/
+/*.jpeg
+/*.png
+
+# WordPress local runtime (managed by Docker volumes, never committed)
+wp-config.php
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

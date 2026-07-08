@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+
+/* Scan the theme's PHP templates for utility classes. */
+@source '../**/*.php';
+
+/*
+|--------------------------------------------------------------------------
+| DESIGN TOKENS — re-skin the whole site by editing this block.
+|--------------------------------------------------------------------------
+| Neutral, professional defaults. The accent is a placeholder — swap it (and
+| the fonts) for the client's brand and rebuild. Nothing below this block
+| hard-codes a colour or font; everything reads from these variables.
+*/
+@theme {
+	--font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Inter', ui-sans-serif, system-ui, sans-serif; /* swap for a brand display face */
+
+	--color-bg: #ffffff;
+	--color-surface: #f6f7f9;
+	--color-surface-2: #eef0f3;
+	--color-ink: #14161a;
+	--color-muted: #5b616e;
+	--color-line: #e6e8ec;
+
+	--color-accent: #4f46e5;         /* ← brand accent placeholder */
+	--color-accent-hover: #4338ca;
+	--color-accent-ink: #ffffff;
+
+	--radius: 0.75rem;
+	--ease-out-cubic: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+	html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+	[x-cloak] { display: none !important; }
+
+	body {
+		background-color: var(--color-bg);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+	}
+
+	::selection { background-color: var(--color-accent); color: var(--color-accent-ink); }
+
+	:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 4px; }
+
+	h1, h2, h3, h4 {
+		font-family: var(--font-display);
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+	}
+}
+
+@layer components {
+	/* Small uppercase label above section headings. */
+	.eyebrow {
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+	}
+
+	/* Buttons. */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		border-radius: var(--radius);
+		font-weight: 600;
+		font-size: 0.95rem;
+		transition: all 0.2s var(--ease-out-cubic);
+	}
+	.btn-primary { background: var(--color-accent); color: var(--color-accent-ink); }
+	.btn-primary:hover { background: var(--color-accent-hover); transform: translateY(-1px); }
+	.btn-ghost { border: 1px solid var(--color-line); color: var(--color-ink); }
+	.btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+	/* Card. */
+	.card {
+		background: var(--color-bg);
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius);
+		transition: box-shadow 0.2s var(--ease-out-cubic), transform 0.2s var(--ease-out-cubic);
+	}
+	.card:hover { box-shadow: 0 12px 32px -12px rgba(20, 22, 26, 0.15); transform: translateY(-2px); }
+
+	/* Long-form article body (blog posts + pages). */
+	.prose-sdp { color: var(--color-ink); font-size: 1.075rem; line-height: 1.75; }
+	.prose-sdp > * + * { margin-top: 1.4em; }
+	.prose-sdp h2 { font-size: 1.75rem; margin-top: 2em; }
+	.prose-sdp h3 { font-size: 1.35rem; margin-top: 1.6em; }
+	.prose-sdp a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+	.prose-sdp ul { list-style: disc; padding-left: 1.4em; }
+	.prose-sdp ol { list-style: decimal; padding-left: 1.4em; }
+	.prose-sdp blockquote { border-left: 3px solid var(--color-accent); padding-left: 1.25em; color: var(--color-muted); font-style: italic; }
+	.prose-sdp img { width: 100%; border-radius: var(--radius); }
+}
+
+/* Scroll-reveal — progressive enhancement. Content is fully visible without JS;
+   only when .has-js is set (in <head>, before paint) do we hide-then-reveal. */
+.has-js [data-reveal] {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.7s var(--ease-out-cubic), transform 0.7s var(--ease-out-cubic);
+	will-change: opacity, transform;
+}
+.has-js [data-reveal].is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+	.has-js [data-reveal] { opacity: 1; transform: none; transition: none; }
+	html { scroll-behavior: auto; }
+}
