@@ -32,6 +32,32 @@ function sdp_meta_description_text() {
 	return wp_trim_words( $d, 30, '…' );
 }
 
+/**
+ * Exact keyword-plan titles per page (2026-07-07 keyword plan). A configured
+ * SEO plugin takes over in production; this keeps the demo's titles precise.
+ */
+add_filter( 'pre_get_document_title', function ( $title ) {
+	if ( defined( 'WPSEO_VERSION' ) || class_exists( 'RankMath' ) ) {
+		return $title;
+	}
+	if ( is_front_page() ) {
+		return 'Insulation Contractor in Marianna, FL | A Plus Insulation';
+	}
+	if ( is_page() ) {
+		$map = array(
+			'services'     => 'Insulation Services in Marianna, FL | Spray Foam & More',
+			'about'        => 'About A Plus Insulation | Marianna, FL Insulation Pros',
+			'service-area' => 'Service Area | Insulation in Jackson County & NW Florida',
+			'contact'      => 'Free Insulation Estimate | A Plus Insulation Marianna FL',
+		);
+		$slug = get_post_field( 'post_name', get_queried_object_id() );
+		if ( isset( $map[ $slug ] ) ) {
+			return $map[ $slug ];
+		}
+	}
+	return $title;
+} );
+
 add_action( 'wp_head', function () {
 	// Defer to a real SEO plugin if present.
 	if ( defined( 'WPSEO_VERSION' ) || class_exists( 'RankMath' ) ) {

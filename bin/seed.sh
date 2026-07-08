@@ -55,12 +55,12 @@ done
 echo "==> Site Settings"
 SS=$(wp post create --post_type=sitesettings --post_title="Site Settings" --post_status=publish --porcelain)
 acf "$SS" tagline    field_ss_tagline    "A warmer, cooler, more efficient home"
-acf "$SS" intro      field_ss_intro      "Family-run insulation contractor serving Marianna and Jackson County since 2006. Spray foam, blown-in, batt & roll, radiant barrier, removal and replacement — no job too big or too small."
+acf "$SS" intro      field_ss_intro      "Spray foam, blown-in & batt insulation for Jackson County homes. A Plus Insulation in Marianna, FL — free estimates. Call (850) 209-2636."
 acf "$SS" cta_url    field_ss_cta_url    "/contact/"
-acf "$SS" cta_label  field_ss_cta_label  "Free Estimate"
+acf "$SS" cta_label  field_ss_cta_label  "Get My Free Estimate"
 acf "$SS" phone      field_ss_phone      "(850) 209-2636"
 acf "$SS" phone_href field_ss_phone_href "+18502092636"
-acf "$SS" email      field_ss_email      "aplusinsulation14@gmail.com"
+acf "$SS" email      field_ss_email      "info@aplusinsulationllc.com"
 acf "$SS" address    field_ss_address    $'5319 Hwy 90\nMarianna, FL 32446'
 acf "$SS" maps_url   field_ss_maps_url   "https://maps.google.com/?q=5319+Hwy+90+Marianna+FL+32446"
 acf "$SS" facebook   field_ss_facebook   "https://www.facebook.com/aplusinsulationllc"
@@ -88,10 +88,10 @@ tst "Robert M."   "Grand Ridge, FL" 5 "Removed the old nasty insulation and blew
 tst "Sheila T."   "Chipley, FL"     5 "Honest, local, and did exactly what they promised. Highly recommend A Plus for anyone in Jackson County." 3
 
 echo "==> Per-page SEO excerpts (theme inc/seo.php uses these for meta description + OG)"
-wp post update "$SERVICES_ID" --post_excerpt="Insulation services in Marianna, FL: spray foam, blown-in, batt & roll, radiant barrier, plus removal and replacement. Free estimates across Jackson County." >/dev/null 2>&1
-wp post update "$ABOUT_ID"    --post_excerpt="A Plus Insulation is a family-owned insulation contractor in Marianna, FL, serving Jackson County since 2006. Licensed, insured — no job too big or too small." >/dev/null 2>&1
-wp post update "$AREA_ID"     --post_excerpt="A Plus Insulation serves Marianna and all of Jackson County, FL — Sneads, Graceville, Chipley, Alford, Bonifay and the surrounding Panhandle." >/dev/null 2>&1
-wp post update "$CONTACT_ID"  --post_excerpt="Request a free insulation estimate from A Plus Insulation in Marianna, FL. Call (850) 209-2636 or send your project details." >/dev/null 2>&1
+wp post update "$SERVICES_ID" --post_excerpt="Attic insulation services in Marianna, FL: spray foam, blown-in, batt & roll, radiant barrier, removal & replacement. Free estimates in Jackson County." >/dev/null 2>&1
+wp post update "$ABOUT_ID"    --post_excerpt="Local, family-run insulation contractor in Marianna, FL. Licensed & insured, serving Jackson County homeowners with honest work and fair prices." >/dev/null 2>&1
+wp post update "$AREA_ID"     --post_excerpt="A Plus Insulation serves Marianna, Sneads, Graceville, Chipley, Bonifay, Cottondale, Grand Ridge, Malone & the NW Florida Panhandle. Free estimates." >/dev/null 2>&1
+wp post update "$CONTACT_ID"  --post_excerpt="Get a free insulation estimate in Marianna, FL. Call A Plus Insulation at (850) 209-2636 or send a message — we serve all of Jackson County." >/dev/null 2>&1
 
 echo "==> Flush + summary"
 wp rewrite structure "/%postname%/" --hard >/dev/null 2>&1
