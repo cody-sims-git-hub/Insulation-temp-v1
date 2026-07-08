@@ -11,6 +11,7 @@ get_template_part( 'template-parts/page-hero' );
 			<?php while ( have_posts() ) : the_post(); the_content(); endwhile; ?>
 		</div>
 		<aside class="space-y-4" data-reveal>
+			<img src="<?php echo esc_url( SDP_URI . '/assets/photos/attic.jpg' ); ?>" alt="A Plus Insulation — upgrade your attic insulation" class="w-full max-w-[240px] rounded-lg border border-line object-cover shadow-sm" loading="lazy">
 			<?php
 			$vals = array(
 				array( 'i' => 'shield', 't' => 'Licensed & insured', 'd' => 'Fully covered so you never carry the risk.' ),

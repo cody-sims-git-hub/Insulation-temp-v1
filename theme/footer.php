@@ -2,8 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-$blog_url = ( $bp = get_option( 'page_for_posts' ) ) ? get_permalink( $bp ) : home_url( '/blog/' );
-$socials  = sdp_socials();
+$socials = sdp_socials();
 ?>
 </main>
 
@@ -11,8 +10,8 @@ $socials  = sdp_socials();
 	<div class="mx-auto max-w-6xl px-5 py-16 lg:px-8">
 		<div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
 			<div>
-				<p class="text-lg font-bold"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></p>
-				<p class="mt-3 max-w-xs text-sm text-muted"><?php echo esc_html( sdp_setting( 'tagline', get_bloginfo( 'description' ) ) ); ?></p>
+				<img src="<?php echo esc_url( SDP_URI . '/assets/logo.jpg' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="h-12 w-auto rounded">
+				<p class="mt-4 max-w-xs text-sm text-muted"><?php echo esc_html( sdp_setting( 'tagline', get_bloginfo( 'description' ) ) ); ?></p>
 				<?php if ( $socials ) : ?>
 					<div class="mt-5 flex gap-3">
 						<?php foreach ( $socials as $net => $url ) : ?>

@@ -11,11 +11,12 @@ $intro     = sdp_setting( 'intro', get_bloginfo( 'description' ) );
 $cta_url   = sdp_setting( 'cta_url', home_url( '/contact/' ) );
 $cta_label = sdp_setting( 'cta_label', 'Free Estimate' );
 $phone     = sdp_setting( 'phone' );
+$photos    = SDP_URI . '/assets/photos';
 $area = array( 'Marianna', 'Sneads', 'Graceville', 'Chipley', 'Alford', 'Bonifay', 'Cottondale', 'Grand Ridge', 'Malone', 'Cypress' );
 ?>
 
 <?php /* ============================ HERO ============================ */ ?>
-<section class="relative overflow-hidden border-b border-line px-5 pb-20 pt-36 lg:px-8 lg:pb-28 lg:pt-44">
+<section class="relative overflow-hidden px-5 pb-12 pt-36 lg:px-8 lg:pb-16 lg:pt-44">
 	<div class="mx-auto max-w-4xl text-center">
 		<span class="eyebrow" data-reveal>Insulation Contractor · Marianna, FL</span>
 		<h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl" data-reveal><?php echo esc_html( $tagline ); ?></h1>
@@ -24,6 +25,13 @@ $area = array( 'Marianna', 'Sneads', 'Graceville', 'Chipley', 'Alford', 'Bonifay
 			<a href="<?php echo esc_url( $cta_url ); ?>" class="btn btn-primary"><?php echo esc_html( $cta_label ); ?> <?php echo sdp_icon( 'arrow', 'h-4 w-4' ); ?></a>
 			<?php if ( $phone ) : ?><a href="tel:<?php echo esc_attr( sdp_setting( 'phone_href' ) ); ?>" class="btn btn-ghost"><?php echo sdp_icon( 'phone', 'h-4 w-4' ); ?> <?php echo esc_html( $phone ); ?></a><?php endif; ?>
 		</div>
+	</div>
+</section>
+
+<?php /* ======================= HERO IMAGE ======================= */ ?>
+<section class="border-b border-line px-5 pb-16 lg:px-8">
+	<div class="mx-auto max-w-5xl" data-reveal>
+		<img src="<?php echo esc_url( $photos . '/fleet.jpg' ); ?>" alt="A Plus Insulation service trucks on a Florida Panhandle job site" class="w-full rounded-lg border border-line object-cover shadow-xl" width="960" height="695" loading="eager">
 	</div>
 </section>
 
@@ -97,7 +105,7 @@ if ( $services->have_posts() ) :
 				array( 'i' => 'shield','n' => 'Sealed',    'l' => 'against heat, moisture & pests' ),
 			);
 			foreach ( $facts as $f ) : ?>
-				<div class="card p-5">
+				<div class="card bg-bg p-5">
 					<span class="text-accent"><?php echo sdp_icon( $f['i'], 'h-6 w-6' ); ?></span>
 					<p class="stat mt-3 text-2xl font-bold"><?php echo esc_html( $f['n'] ); ?></p>
 					<p class="mt-1 text-xs leading-relaxed text-muted"><?php echo esc_html( $f['l'] ); ?></p>
@@ -107,14 +115,35 @@ if ( $services->have_posts() ) :
 	</div>
 </section>
 
-<?php /* =================== SERVICE AREA ==================== */ ?>
+<?php /* ===================== RECENT WORK ===================== */ ?>
 <section class="px-5 py-20 lg:px-8 lg:py-28">
+	<div class="mx-auto max-w-5xl">
+		<div class="max-w-2xl" data-reveal>
+			<span class="eyebrow">Our work</span>
+			<h2 class="mt-4 text-3xl sm:text-4xl">Real jobs across the Panhandle</h2>
+		</div>
+		<div class="mt-10 grid gap-4 sm:grid-cols-3" data-reveal>
+			<?php
+			$gallery = array(
+				array( 'f' => 'interior.jpg',   'a' => 'Spray foam insulation throughout a home interior' ),
+				array( 'f' => 'spray-foam.jpg', 'a' => 'Applying spray foam insulation in an attic' ),
+				array( 'f' => 'attic.jpg',      'a' => 'Attic insulation upgrade by A Plus Insulation' ),
+			);
+			foreach ( $gallery as $g ) : ?>
+				<img src="<?php echo esc_url( $photos . '/' . $g['f'] ); ?>" alt="<?php echo esc_attr( $g['a'] ); ?>" class="w-full rounded-lg border border-line object-cover shadow-sm" style="aspect-ratio: 4 / 3;" loading="lazy">
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+
+<?php /* =================== SERVICE AREA ==================== */ ?>
+<section class="border-t border-line bg-surface px-5 py-20 lg:px-8 lg:py-28">
 	<div class="mx-auto max-w-6xl text-center">
 		<span class="eyebrow" data-reveal>Where we work</span>
 		<h2 class="mt-4 text-3xl sm:text-4xl" data-reveal>Serving Marianna &amp; Jackson County</h2>
 		<div class="mt-10 flex flex-wrap justify-center gap-3" data-reveal>
 			<?php foreach ( $area as $town ) : ?>
-				<span class="rounded border border-line bg-surface px-4 py-2 text-sm font-medium"><?php echo esc_html( $town ); ?></span>
+				<span class="rounded border border-line bg-bg px-4 py-2 text-sm font-medium"><?php echo esc_html( $town ); ?></span>
 			<?php endforeach; ?>
 		</div>
 		<p class="mt-8 text-sm text-muted" data-reveal>Not sure if we reach you? <a href="<?php echo esc_url( home_url( '/service-area/' ) ); ?>" class="font-semibold text-accent hover:underline">Check the full area</a> or call <a href="tel:<?php echo esc_attr( sdp_setting( 'phone_href' ) ); ?>" class="font-semibold text-accent hover:underline"><?php echo esc_html( $phone ); ?></a>.</p>
@@ -125,7 +154,7 @@ if ( $services->have_posts() ) :
 <?php
 $tests = new WP_Query( array( 'post_type' => 'testimonial', 'posts_per_page' => 3, 'orderby' => 'menu_order', 'order' => 'ASC' ) );
 if ( $tests->have_posts() ) : ?>
-	<section class="border-t border-line bg-surface px-5 py-20 lg:px-8 lg:py-28">
+	<section class="px-5 py-20 lg:px-8 lg:py-28">
 		<div class="mx-auto max-w-6xl">
 			<div class="max-w-2xl" data-reveal><span class="eyebrow">Reviews</span><h2 class="mt-4 text-3xl sm:text-4xl">What neighbors say</h2></div>
 			<div class="mt-12 grid gap-6 md:grid-cols-3">

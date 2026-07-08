@@ -2,7 +2,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-$blog_url  = ( $bp = get_option( 'page_for_posts' ) ) ? get_permalink( $bp ) : home_url( '/blog/' );
 $nav       = array(
 	array( 'label' => 'Services',     'url' => home_url( '/services/' ) ),
 	array( 'label' => 'About',        'url' => home_url( '/about/' ) ),
@@ -11,6 +10,7 @@ $nav       = array(
 );
 $cta_url   = sdp_setting( 'cta_url', home_url( '/#contact' ) );
 $cta_label = sdp_setting( 'cta_label', 'Get in touch' );
+$logo      = SDP_URI . '/assets/logo.jpg';
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -27,9 +27,9 @@ $cta_label = sdp_setting( 'cta_label', 'Get in touch' );
 
 <div x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 20">
 	<header :class="scrolled ? 'border-line bg-bg/90 backdrop-blur' : 'border-transparent'" class="fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300">
-		<div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 lg:px-8">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-lg font-bold tracking-tight" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> home">
-				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>
+		<div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 lg:px-8">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> home">
+				<img src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="h-12 w-auto rounded">
 			</a>
 
 			<nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
@@ -51,7 +51,7 @@ $cta_label = sdp_setting( 'cta_label', 'Get in touch' );
 
 	<div x-cloak x-show="open" x-transition.opacity class="fixed inset-0 z-50 overflow-y-auto bg-bg lg:hidden">
 		<div class="flex items-center justify-between px-5 py-4">
-			<span class="text-lg font-bold"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></span>
+			<img src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="h-10 w-auto rounded">
 			<button @click="open = false" class="text-ink" aria-label="Close menu"><?php echo sdp_icon( 'close', 'h-6 w-6' ); ?></button>
 		</div>
 		<nav class="flex flex-col px-5 pt-6" aria-label="Mobile">
