@@ -60,7 +60,7 @@ add_filter( 'wp_resource_hints', function ( $hints, $relation ) {
 	return $hints;
 }, 10, 2 );
 
-foreach ( array( 'icons', 'post-types', 'fields', 'template-helpers', 'security', 'seo' ) as $module ) {
+foreach ( array( 'icons', 'post-types', 'fields', 'template-helpers', 'security', 'seo', 'schema' ) as $module ) {
 	$path = SDP_DIR . "/inc/{$module}.php";
 	if ( file_exists( $path ) ) {
 		require $path;
