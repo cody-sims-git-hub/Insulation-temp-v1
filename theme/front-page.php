@@ -31,7 +31,7 @@ $area = array( 'Marianna', 'Sneads', 'Graceville', 'Chipley', 'Alford', 'Bonifay
 <?php /* ======================= HERO IMAGE ======================= */ ?>
 <section class="border-b border-line px-5 pb-16 lg:px-8">
 	<div class="mx-auto max-w-5xl" data-reveal>
-		<img src="<?php echo esc_url( $photos . '/fleet.jpg' ); ?>" alt="A Plus Insulation service trucks on a Florida Panhandle job site" class="w-full rounded-lg border border-line object-cover shadow-xl" width="960" height="695" loading="eager">
+		<img src="<?php echo esc_url( $photos . '/fleet.jpg' ); ?>" alt="A Plus Insulation service trucks on a Florida Panhandle job site" class="w-full rounded-lg border border-line object-cover shadow-xl" width="2048" height="1482" loading="eager">
 	</div>
 </section>
 
@@ -125,12 +125,12 @@ if ( $services->have_posts() ) :
 		<div class="mt-10 grid gap-4 sm:grid-cols-3" data-reveal>
 			<?php
 			$gallery = array(
-				array( 'f' => 'interior.jpg',   'a' => 'Spray foam insulation throughout a home interior' ),
-				array( 'f' => 'spray-foam.jpg', 'a' => 'Applying spray foam insulation in an attic' ),
-				array( 'f' => 'attic.jpg',      'a' => 'Attic insulation upgrade by A Plus Insulation' ),
+				array( 'f' => 'attic.jpg',     'a' => 'A home attic fully insulated with spray foam by A Plus Insulation' ),
+				array( 'f' => 'worker.jpg',    'a' => 'A Plus Insulation crew member applying spray foam insulation' ),
+				array( 'f' => 'materials.jpg', 'a' => 'Fiberglass insulation ready for installation' ),
 			);
 			foreach ( $gallery as $g ) : ?>
-				<img src="<?php echo esc_url( $photos . '/' . $g['f'] ); ?>" alt="<?php echo esc_attr( $g['a'] ); ?>" class="w-full rounded-lg border border-line object-cover shadow-sm" style="aspect-ratio: 4 / 3;" loading="lazy">
+				<img src="<?php echo esc_url( $photos . '/' . $g['f'] ); ?>" alt="<?php echo esc_attr( $g['a'] ); ?>" class="w-full rounded-lg border border-line object-cover shadow-sm" style="aspect-ratio: 4 / 5;" loading="lazy">
 			<?php endforeach; ?>
 		</div>
 	</div>
