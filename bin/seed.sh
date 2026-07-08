@@ -10,8 +10,12 @@ acf() { local id="$1" name="$2" key="$3" val="$4"; wp post meta update "$id" "$n
 echo "==> Plugins: ACF + Rank Math"
 wp plugin is-installed advanced-custom-fields >/dev/null 2>&1 || wp plugin install advanced-custom-fields >/dev/null
 wp plugin activate advanced-custom-fields >/dev/null 2>&1
+# Rank Math is installed (ready for production: sitemaps, config wizard) but left
+# DEACTIVATED for the demo. Un-configured Rank Math renders no frontend meta and
+# suppresses the theme's inc/seo.php; deactivating lets the theme baseline emit a
+# real meta description + OpenGraph on every page. Activate + run the wizard for prod.
 wp plugin is-installed seo-by-rank-math >/dev/null 2>&1 || wp plugin install seo-by-rank-math >/dev/null
-wp plugin activate seo-by-rank-math >/dev/null 2>&1
+wp plugin deactivate seo-by-rank-math >/dev/null 2>&1
 wp theme activate aplus-insulation >/dev/null 2>&1
 
 echo "==> Pages (home + 4 interior)"
@@ -21,10 +25,10 @@ page() { # slug title
   echo "$id"
 }
 HOME_ID=$(page home "Home")
-page services "Services" >/dev/null
+SERVICES_ID=$(page services "Services")
 ABOUT_ID=$(page about "About")
-page service-area "Service Area" >/dev/null
-page contact "Contact" >/dev/null
+AREA_ID=$(page service-area "Service Area")
+CONTACT_ID=$(page contact "Contact")
 wp post update "$ABOUT_ID" --post_status=publish --post_content='<p>A Plus Insulation is a family-owned insulation contractor based in Marianna, Florida. Since 2006 we have helped homeowners and builders across Jackson County and the Panhandle make their homes more comfortable and far more efficient.</p><p>We install every major type of insulation — spray foam, blown-in, batt and roll, and radiant barrier — and we handle removal and replacement of old or damaged material. Whatever the project, we show up on time, do clean work, and stand behind it.</p>' >/dev/null
 wp option update show_on_front page >/dev/null
 wp option update page_on_front "$HOME_ID" >/dev/null
@@ -82,6 +86,12 @@ tst() { local id; id=$(wp post create --post_type=testimonial --post_title="$1" 
 tst "Danielle W." "Marianna, FL"    5 "They insulated our attic with spray foam and the difference was immediate — the house holds its cool and our power bill dropped. Professional crew, fair price." 1
 tst "Robert M."   "Grand Ridge, FL" 5 "Removed the old nasty insulation and blew in new. On time, cleaned up after themselves, no job too big or too small like they say." 2
 tst "Sheila T."   "Chipley, FL"     5 "Honest, local, and did exactly what they promised. Highly recommend A Plus for anyone in Jackson County." 3
+
+echo "==> Per-page SEO excerpts (theme inc/seo.php uses these for meta description + OG)"
+wp post update "$SERVICES_ID" --post_excerpt="Insulation services in Marianna, FL: spray foam, blown-in, batt & roll, radiant barrier, plus removal and replacement. Free estimates across Jackson County." >/dev/null 2>&1
+wp post update "$ABOUT_ID"    --post_excerpt="A Plus Insulation is a family-owned insulation contractor in Marianna, FL, serving Jackson County since 2006. Licensed, insured — no job too big or too small." >/dev/null 2>&1
+wp post update "$AREA_ID"     --post_excerpt="A Plus Insulation serves Marianna and all of Jackson County, FL — Sneads, Graceville, Chipley, Alford, Bonifay and the surrounding Panhandle." >/dev/null 2>&1
+wp post update "$CONTACT_ID"  --post_excerpt="Request a free insulation estimate from A Plus Insulation in Marianna, FL. Call (850) 209-2636 or send your project details." >/dev/null 2>&1
 
 echo "==> Flush + summary"
 wp rewrite structure "/%postname%/" --hard >/dev/null 2>&1
