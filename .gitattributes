@@ -1,0 +1,13 @@
+# Normalize line endings to LF on commit — this repo is edited from both WSL and
+# Windows tooling; without this, mode/CRLF phantom diffs appear (see SDP memory).
+* text=auto eol=lf
+
+# Binary assets — never normalize.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
