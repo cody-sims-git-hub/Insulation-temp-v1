@@ -107,7 +107,6 @@ Full new content of `docker-compose.yml`:
 services:
   db:
     image: mysql:8
-    command: --default-authentication-plugin=caching_sha2_password
     environment:
       MYSQL_DATABASE: sdp
       MYSQL_USER: sdp

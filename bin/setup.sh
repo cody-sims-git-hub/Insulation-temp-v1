@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install WordPress + activate the SDP Starter theme. Safe to re-run.
+# Install WordPress + activate the A Plus Insulation theme. Safe to re-run.
 # Run from the template root (the folder containing docker-compose.yml).
 set -uo pipefail
 cd "$(dirname "$0")/.."
@@ -16,14 +16,14 @@ if wp core is-installed 2>/dev/null; then
   echo "==> already installed"
 else
   wp core install \
-    --url="http://localhost:8081" \
-    --title="SDP Starter" \
+    --url="http://localhost:8090" \
+    --title="A Plus Insulation" \
     --admin_user="admin" \
     --admin_password="admin" \
     --admin_email="dev@simsdigitalpartners.com" \
     --skip-email
 fi
 
-wp theme activate sdp-starter
+wp theme activate aplus-insulation
 wp rewrite structure "/%postname%/" --hard >/dev/null
-echo "==> done — http://localhost:8081  (admin/admin)"
+echo "==> done — http://localhost:8090  (admin/admin)"
