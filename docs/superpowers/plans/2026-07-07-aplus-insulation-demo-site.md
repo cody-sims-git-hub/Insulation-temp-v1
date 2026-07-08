@@ -2,6 +2,13 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **Implementation deviations (executed 2026-07-07, inline — tmux/subagent dispatch was unavailable):**
+> 1. **MySQL 8.4** — `mysql:8` now resolves to 8.4, which removed `--default-authentication-plugin`; that `command:` line was dropped (8.4 defaults to `caching_sha2_password`, which `wordpress:php8.3` supports). Fixed in the compose block above.
+> 2. **Deterministic 5 pages** — the by-name default-page cleanup was replaced with a keep-only-the-5 loop (drops WP's Sample Page + Privacy-Policy draft reliably). Reflected in the seed block above.
+> 3. **About body via seed** — Task 7 Step 4's inline `wp post update $(…)` was moved into `seed.sh` (command-substitution is mangled by the WSL bridge inline but works inside the script). Reflected above.
+> 4. **SEO — Rank Math installed but DEACTIVATED for the demo.** Un-configured Rank Math rendered no frontend meta and suppressed the theme's `inc/seo.php`. Deactivating lets the theme baseline emit a real meta description + OpenGraph on every page; interior pages get per-page excerpts for specific descriptions. Rank Math stays installed for production (activate + run its wizard for sitemaps). This supersedes the "Rank Math active" note in §9 and the `wp plugin activate seo-by-rank-math` line in the Task 3 seed block.
+> All five tasks' checks passed; a from-zero rebuild (`down -v` → up → setup → build → seed) reproduces the site.
+
 **Goal:** Build a 5-page WordPress demo site for A Plus Insulation (Marianna, FL), scaffolded from the SDP starter kit and re-skinned to a Swiss/eco design, running locally on Docker + MySQL 8.
 
 **Architecture:** Copy `sdp-starter-kit/templates/wordpress-cms` into this repo unchanged, then (a) reconfigure the stack (MySQL 8, port 8090, theme slug `aplus-insulation`), (b) re-skin via the `@theme` token block + fonts, (c) seed real business content and the 5 pages, (d) rework the front page and add four interior page templates, and (e) emit `LocalBusiness` JSON-LD. The theme is a classic PHP theme; content comes from ACF-backed CPTs (`service`, `testimonial`, `sitesettings`) read through existing `sdp_*` helpers. The design owns layout; the client edits data only.
