@@ -33,7 +33,7 @@ add_action( 'init', function () {
 		'menu_icon'     => 'dashicons-portfolio',
 		'menu_position' => 22,
 		'supports'      => array( 'title', 'thumbnail', 'page-attributes' ),
-		'rewrite'       => array( 'slug' => 'services' ),
+		'rewrite'       => array( 'slug' => 'service' ),
 	) );
 
 	register_post_type( 'testimonial', array(

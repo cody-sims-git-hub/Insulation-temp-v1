@@ -242,6 +242,16 @@ wp option update page_for_posts 0 >/dev/null
 wp option update blogname "A Plus Insulation" >/dev/null
 wp option update blogdescription "Insulation Contractor in Marianna, FL" >/dev/null
 
+echo "==> Keep only the 5 target pages (drop WP defaults: sample page, privacy policy)"
+wp option update wp_page_for_privacy_policy 0 >/dev/null 2>&1
+for pid in $(wp post list --post_type=page --post_status=any --field=ID 2>/dev/null); do
+  nm=$(wp post get "$pid" --field=post_name 2>/dev/null)
+  case "$nm" in
+    home|services|about|service-area|contact) : ;;
+    *) wp post delete "$pid" --force >/dev/null 2>&1 ;;
+  esac
+done
+
 echo "==> Reset CPT content"
 for pt in team service testimonial sitesettings; do
   ids=$(wp post list --post_type=$pt --format=ids --posts_per_page=-1 2>/dev/null)
