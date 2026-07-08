@@ -4,10 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $blog_url  = ( $bp = get_option( 'page_for_posts' ) ) ? get_permalink( $bp ) : home_url( '/blog/' );
 $nav       = array(
-	array( 'label' => 'Services', 'url' => home_url( '/#services' ) ),
-	array( 'label' => 'Team',     'url' => home_url( '/#team' ) ),
-	array( 'label' => 'Blog',     'url' => $blog_url ),
-	array( 'label' => 'Contact',  'url' => home_url( '/#contact' ) ),
+	array( 'label' => 'Services',     'url' => home_url( '/services/' ) ),
+	array( 'label' => 'About',        'url' => home_url( '/about/' ) ),
+	array( 'label' => 'Service Area', 'url' => home_url( '/service-area/' ) ),
+	array( 'label' => 'Contact',      'url' => home_url( '/contact/' ) ),
 );
 $cta_url   = sdp_setting( 'cta_url', home_url( '/#contact' ) );
 $cta_label = sdp_setting( 'cta_label', 'Get in touch' );
@@ -38,7 +38,10 @@ $cta_label = sdp_setting( 'cta_label', 'Get in touch' );
 				<?php endforeach; ?>
 			</nav>
 
-			<div class="hidden lg:flex">
+			<div class="hidden items-center gap-4 lg:flex">
+				<?php if ( $ph = sdp_setting( 'phone' ) ) : ?>
+					<a href="tel:<?php echo esc_attr( sdp_setting( 'phone_href' ) ); ?>" class="inline-flex items-center gap-2 text-sm font-semibold text-ink hover:text-accent"><?php echo sdp_icon( 'phone', 'h-4 w-4' ); ?><?php echo esc_html( $ph ); ?></a>
+				<?php endif; ?>
 				<a href="<?php echo esc_url( $cta_url ); ?>" class="btn btn-primary"><?php echo esc_html( $cta_label ); ?></a>
 			</div>
 

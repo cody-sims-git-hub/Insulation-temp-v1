@@ -25,10 +25,10 @@ $socials  = sdp_socials();
 			<div>
 				<h3 class="eyebrow">Explore</h3>
 				<ul class="mt-4 space-y-2.5 text-sm text-muted">
-					<li><a href="<?php echo esc_url( home_url( '/#services' ) ); ?>" class="transition-colors hover:text-ink">Services</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#team' ) ); ?>" class="transition-colors hover:text-ink">Team</a></li>
-					<li><a href="<?php echo esc_url( $blog_url ); ?>" class="transition-colors hover:text-ink">Blog</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#contact' ) ); ?>" class="transition-colors hover:text-ink">Contact</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>" class="transition-colors hover:text-ink">Services</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="transition-colors hover:text-ink">About</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/service-area/' ) ); ?>" class="transition-colors hover:text-ink">Service Area</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="transition-colors hover:text-ink">Contact</a></li>
 				</ul>
 			</div>
 
