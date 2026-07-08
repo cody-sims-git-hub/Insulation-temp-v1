@@ -33,7 +33,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	// starter so there's zero build config for type. Font family is a token.
 	wp_enqueue_style(
 		'sdp-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap',
 		array(),
 		null
 	);

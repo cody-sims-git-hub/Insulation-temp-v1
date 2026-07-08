@@ -6,21 +6,23 @@
 		"color": {
 			"custom": true,
 			"palette": [
-				{ "slug": "ink", "color": "#14161a", "name": "Ink" },
-				{ "slug": "muted", "color": "#5b616e", "name": "Muted" },
-				{ "slug": "surface", "color": "#f6f7f9", "name": "Surface" },
-				{ "slug": "accent", "color": "#4f46e5", "name": "Accent" },
-				{ "slug": "bg", "color": "#ffffff", "name": "Background" }
+				{ "slug": "ink", "color": "#1b2a20", "name": "Ink" },
+				{ "slug": "muted", "color": "#55635a", "name": "Muted" },
+				{ "slug": "surface", "color": "#f1ede4", "name": "Surface" },
+				{ "slug": "accent", "color": "#2f5d3a", "name": "Accent" },
+				{ "slug": "cta", "color": "#bd5f30", "name": "CTA" },
+				{ "slug": "bg", "color": "#faf8f3", "name": "Background" }
 			]
 		},
 		"typography": {
 			"fontFamilies": [
-				{ "fontFamily": "'Inter', ui-sans-serif, system-ui, sans-serif", "slug": "sans", "name": "Inter" }
+				{ "fontFamily": "'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif", "slug": "sans", "name": "IBM Plex Sans" },
+				{ "fontFamily": "'IBM Plex Mono', ui-monospace, monospace", "slug": "mono", "name": "IBM Plex Mono" }
 			]
 		},
 		"layout": { "contentSize": "44rem", "wideSize": "72rem" }
 	},
 	"styles": {
-		"color": { "background": "#ffffff", "text": "#14161a" }
+		"color": { "background": "#faf8f3", "text": "#1b2a20" }
 	}
 }
