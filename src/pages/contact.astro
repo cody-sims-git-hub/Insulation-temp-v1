@@ -1,0 +1,98 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import QuoteForm from '@/components/QuoteForm.tsx';
+import { Phone, MapPin, Clock, ArrowUpRight } from 'lucide-astro';
+import { seo, business, services } from '@/data/site';
+
+const serviceNames = services.map((s) => s.title);
+const leadEndpoint = import.meta.env.PUBLIC_LEAD_ENDPOINT as string | undefined;
+
+const nextSteps = [
+  { n: '1', t: 'We call you back', d: 'A real person calls you back within one business day — no call center.' },
+  { n: '2', t: 'Free attic assessment', d: 'We measure depth, condition and air leaks, and show you photos of what we find.' },
+  { n: '3', t: 'A written number', d: 'You get a written, itemized estimate — no pressure, no obligation.' },
+];
+---
+
+<Base title={seo.contact.title} description={seo.contact.description} ogImage="/photos/fleet.jpg">
+  <PageHero
+    eyebrow="Contact"
+    title="Get Your Free Insulation Estimate"
+    lead="Tell us about your project and we’ll get right back to you — with a written, itemized number. Prefer to talk? Call us during business hours."
+  />
+
+  <section class="px-4 py-12 lg:px-5 lg:py-16">
+    <div class="mx-auto grid max-w-[84rem] gap-10 lg:grid-cols-5 lg:gap-14">
+      <div class="lg:col-span-3" data-reveal>
+        <QuoteForm
+          client:load
+          services={serviceNames}
+          phone={business.phone}
+          phoneHref={business.phoneHref}
+          endpoint={leadEndpoint}
+        />
+      </div>
+
+      <aside class="space-y-4 lg:col-span-2" data-reveal>
+        <div class="surface p-6">
+          <p class="text-sm font-semibold uppercase tracking-wide text-muted">Call</p>
+          <a href={`tel:${business.phoneHref}`} class="mt-2 block font-display text-4xl text-ink transition-colors hover:text-petrol">
+            {business.phone}
+          </a>
+        </div>
+
+        <div class="surface p-6">
+          <p class="text-sm font-semibold uppercase tracking-wide text-muted">Visit</p>
+          <address class="mt-2 flex items-start gap-2.5 not-italic text-ink-soft">
+            <span class="mt-0.5 text-petrol"><MapPin class="size-5" /></span>
+            <span>{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postal}</span>
+          </address>
+          <a
+            href={business.mapsUrl}
+            target="_blank"
+            rel="noopener"
+            class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-petrol hover:underline"
+          >
+            Directions <ArrowUpRight class="size-3.5" />
+          </a>
+        </div>
+
+        <div class="surface p-6">
+          <p class="text-sm font-semibold uppercase tracking-wide text-muted">Hours</p>
+          <dl class="mt-3 space-y-1.5">
+            {
+              business.hours.map((h) => (
+                <div class="flex items-center justify-between gap-4">
+                  <dt class="text-ink-soft">{h.day}</dt>
+                  <dd class:list={['font-semibold', h.closed ? 'text-muted' : 'text-ink']}>{h.time}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="mt-4 flex items-center gap-2 border-t border-line pt-4 text-sm text-muted">
+            <Clock class="size-4 text-petrol" /> ASL-proficient · cash &amp; all major cards
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="px-4 py-8 lg:px-5 lg:py-12">
+    <div class="mx-auto max-w-[84rem]">
+      <span class="tag" data-reveal>What to expect</span>
+      <h2 class="mt-4 text-5xl text-ink sm:text-6xl" data-reveal>What happens after you hit send</h2>
+      <ol class="mt-10 grid gap-5 sm:grid-cols-3">
+        {
+          nextSteps.map((s) => (
+            <li class="surface p-7" data-reveal>
+              <span class="font-display text-6xl text-petrol">{s.n}</span>
+              <h3 class="mt-3 text-lg font-bold uppercase tracking-wide text-ink">{s.t}</h3>
+              <p class="mt-1.5 text-muted">{s.d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,36 @@
+---
+/**
+ * Signature motif: stacked heat-rise / contour lines. Evokes thermal imaging
+ * and rising attic heat — a crafted texture that grounds the brand in its
+ * subject instead of a generic gradient or blob. Purely decorative.
+ */
+interface Props {
+  class?: string;
+  lines?: number;
+  opacity?: number;
+}
+const { class: className = '', lines = 12, opacity = 0.5 } = Astro.props;
+const rows = Array.from({ length: lines }, (_, i) => i);
+---
+
+<svg
+  class={className}
+  viewBox="0 0 1440 900"
+  fill="none"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  style={`opacity:${opacity}`}
+>
+  <defs>
+    <path
+      id="hl-wave"
+      d="M-40 120 C 220 40 420 200 720 120 C 1020 40 1220 200 1480 120"
+      stroke="currentColor"
+      stroke-width="1.5"
+      vector-effect="non-scaling-stroke"
+    />
+  </defs>
+  {rows.map((r) => (
+    <use href="#hl-wave" transform={`translate(${r % 2 === 0 ? 0 : -36} ${r * 66 - 60}) scale(1 ${1 + (r % 3) * 0.06})`} />
+  ))}
+</svg>

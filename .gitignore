@@ -1,6 +1,10 @@
 # Node / build
-theme/node_modules/
-theme/dist/
+node_modules/
+dist/
+.astro/
+
+# retired classic-WordPress theme/harness (superseded by the Astro build)
+theme/
 
 # Local browser automation artifacts
 .playwright-mcp/
@@ -9,6 +13,10 @@ theme/dist/
 
 # WordPress local runtime (managed by Docker volumes, never committed)
 wp-config.php
+
+# environment
+.env
+.env.production
 
 # OS / editor
 .DS_Store

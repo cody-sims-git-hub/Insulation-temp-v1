@@ -1,0 +1,31 @@
+---
+import { Phone, ArrowRight } from 'lucide-astro';
+import HeatLines from '@/components/HeatLines.astro';
+import { business, cta } from '@/data/site';
+
+interface Props {
+  heading?: string;
+  sub?: string;
+}
+const {
+  heading = 'A cooler house and a lower bill start with one call',
+  sub = 'Free attic assessment, a written and itemized number, and no pressure. Most estimates are a short drive from our Marianna shop.',
+} = Astro.props;
+---
+
+<section class="px-4 py-8 lg:px-5 lg:py-12">
+  <div class="relative mx-auto max-w-[84rem] overflow-hidden rounded-[2.5rem] bg-petrol text-cream shadow-lift">
+    <HeatLines class="pointer-events-none absolute inset-0 h-full w-full text-mist" opacity={0.16} />
+    <div class="relative px-6 py-16 text-center lg:px-12 lg:py-24">
+      <span class="tag tag-light mx-auto w-fit" data-reveal>Free estimate</span>
+      <h2 class="mx-auto mt-6 max-w-4xl text-6xl sm:text-7xl lg:text-8xl" data-reveal>{heading}</h2>
+      <p class="mx-auto mt-6 max-w-xl leading-relaxed text-cream/85" data-reveal>{sub}</p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" data-reveal>
+        <a href={cta.href} class="btn btn-coral">{cta.label} <ArrowRight class="size-4" /></a>
+        <a href={`tel:${business.phoneHref}`} class="btn btn-outline-light">
+          <Phone class="size-4" /> {business.phone}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

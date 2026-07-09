@@ -1,0 +1,145 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import CtaBand from '@/components/sections/CtaBand.astro';
+import Icon from '@/components/Icon.astro';
+import { ArrowRight } from 'lucide-astro';
+import { seo, services, process, cta } from '@/data/site';
+
+const applications = 'Attic · Ceilings · Interior & exterior walls · Floors · Crawlspace · Garage · Roof deck';
+const photos: Record<string, string> = {
+  'spray-foam': 'foam-walls.jpg',
+  'blown-in': 'attic-foam.jpg',
+  'batt-roll': 'foam-garage.jpg',
+  'radiant-barrier': 'foam-ceiling.jpg',
+  removal: 'jobsite.jpg',
+  replacement: 'fleet.jpg',
+};
+---
+
+<Base title={seo.services.title} description={seo.services.description} ogImage="/photos/foam-walls.jpg">
+  <PageHero
+    eyebrow="Services"
+    title="Home Insulation Services in Marianna & the Florida Panhandle"
+    lead="Spray foam, blown-in, batt & roll, radiant barrier, removal and replacement — with straight answers on the best insulation for Florida homes and what we would put in our own attic."
+  />
+
+  {/* Jump nav */}
+  <nav class="sticky top-[84px] z-30 px-4 py-3 lg:px-5" aria-label="Jump to a service">
+    <div class="mx-auto flex max-w-[84rem] flex-wrap gap-2.5 rounded-full bg-cream/85 px-4 py-3 shadow-soft backdrop-blur-md">
+      {
+        services.map((s) => (
+          <a
+            href={`#${s.id}`}
+            class="inline-flex min-h-[40px] items-center rounded-full px-4 text-sm font-semibold text-ink-soft transition-colors hover:bg-petrol/10 hover:text-petrol"
+          >
+            {s.title.replace(' Insulation', '')}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  {
+    services.map((s, i) => (
+      <section id={s.id} class="scroll-mt-28 px-4 py-12 lg:px-5 lg:py-16">
+        <div class="mx-auto grid max-w-[84rem] items-start gap-10 lg:grid-cols-2 lg:gap-16">
+          <div class:list={['space-y-7', i % 2 === 1 ? 'lg:order-2' : '']} data-reveal>
+            <div class="flex items-center gap-4">
+              <span class="grid size-14 shrink-0 place-items-center rounded-2xl bg-petrol/10 text-petrol">
+                <Icon name={s.icon} class="size-7" />
+              </span>
+              <h2 class="text-5xl text-ink sm:text-6xl">{s.title}</h2>
+            </div>
+
+            <p class="leading-relaxed text-ink-soft">{s.what}</p>
+
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-wide text-muted">Best for</p>
+              <ul class="mt-3 flex flex-wrap gap-2.5">
+                {s.best.map((chip) => (
+                  <li class="inline-flex items-center rounded-full bg-cream px-3.5 py-1.5 text-sm font-medium text-ink shadow-soft">
+                    {chip}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="rounded-2xl bg-cream p-6 shadow-soft">
+              <p class="text-sm font-semibold uppercase tracking-wide text-muted">R-value guidance</p>
+              <p class="mt-2 flex flex-wrap items-baseline gap-3">
+                <span class="font-display text-5xl text-petrol">{s.rStat}</span>
+                <span class="flex-1 text-sm leading-relaxed text-muted">{s.rNote}</span>
+              </p>
+            </div>
+
+            <div class="border-l-4 border-coral pl-5">
+              <h3 class="text-lg font-bold text-ink">Honest tradeoffs</h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">{s.tradeoffs}</p>
+            </div>
+
+            <div class="space-y-5">
+              {s.faqs.map((faq) => (
+                <div>
+                  <h3 class="text-lg font-bold text-ink">{faq.q}</h3>
+                  <p class="mt-1.5 leading-relaxed text-ink-soft">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+
+            <a href={cta.href} class="btn btn-petrol">Get a free estimate <ArrowRight class="size-4" /></a>
+          </div>
+
+          <div class:list={['lg:sticky lg:top-28', i % 2 === 1 ? 'lg:order-1' : '']} data-reveal>
+            <div class="duotone aspect-[4/5] w-full shadow-lift">
+              <img src={`/photos/${photos[s.id]}`} alt={`${s.title} — A Plus Insulation, Marianna FL`} loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  {/* Where we insulate */}
+  <section class="px-4 py-12 lg:px-5 lg:py-16">
+    <div class="mx-auto max-w-[84rem]">
+      <div class="grid overflow-hidden rounded-[2rem] shadow-lift md:grid-cols-2" data-reveal>
+        <div class="duotone aspect-[4/3] w-full rounded-none md:aspect-auto md:h-full">
+          <img src="/photos/jobsite.jpg" alt="A Plus Insulation trucks at a Marianna, FL job site" loading="lazy" />
+        </div>
+        <div class="bg-cream p-8 lg:p-12">
+          <span class="tag">Coverage</span>
+          <h2 class="mt-4 text-4xl text-ink sm:text-5xl">Where we insulate</h2>
+          <p class="mt-4 leading-relaxed text-ink-soft">{applications}</p>
+          <p class="mt-4 leading-relaxed text-ink-soft">
+            New construction or existing home — we assess your space and recommend the right material and R-value for the
+            Panhandle climate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Process */}
+  <section class="px-4 py-8 lg:px-5 lg:py-12">
+    <div class="relative mx-auto max-w-[84rem] overflow-hidden rounded-[2.5rem] bg-ink text-cream shadow-lift">
+      <div class="relative p-8 lg:p-14">
+        <span class="tag tag-light" data-reveal>How it works</span>
+        <h2 class="mt-5 text-5xl sm:text-6xl" data-reveal>From first call to install day</h2>
+        <ol class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            process.map((step, n) => (
+              <li data-reveal>
+                <span class="grid size-12 place-items-center rounded-2xl bg-coral font-display text-2xl text-ink">{n + 1}</span>
+                <h3 class="mt-5 text-xl font-bold text-cream">{step.t}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-cream/70">{step.d}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

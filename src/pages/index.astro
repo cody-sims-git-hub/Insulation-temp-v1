@@ -1,0 +1,331 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/Icon.astro';
+import HeatLines from '@/components/HeatLines.astro';
+import CtaBand from '@/components/sections/CtaBand.astro';
+import Faq from '@/components/Faq.tsx';
+import BeforeAfter from '@/components/BeforeAfter.tsx';
+import { ArrowRight, Phone, Check, Star, HandCoins } from 'lucide-astro';
+import {
+  business,
+  cta,
+  seo,
+  stats,
+  problemPoints,
+  services,
+  process,
+  gallery,
+  testimonials,
+  serviceAreaChips,
+  faqs,
+} from '@/data/site';
+
+const proof = [
+  { icon: 'shield-check', label: 'Licensed & insured' },
+  { icon: 'clock', label: 'Family-run since 2006' },
+  { icon: 'coins', label: 'Free written estimates' },
+];
+const statColors = ['text-petrol', 'text-ink', 'text-petrol', 'text-ink'];
+---
+
+<Base title={seo.home.title} description={seo.home.description} faqSchema ogImage="/photos/fleet.jpg">
+  {/* ===================== 1 · HERO ===================== */}
+  <section class="relative overflow-hidden px-4 pt-10 lg:px-5 lg:pt-16">
+    <HeatLines class="pointer-events-none absolute -top-24 right-0 h-[560px] w-[70%] text-petrol" opacity={0.10} />
+    <div class="relative mx-auto grid max-w-[84rem] items-center gap-8 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-6">
+        <span class="tag">Insulation contractor · Marianna, FL</span>
+        <h1 class="mt-6 text-[3.5rem] leading-[0.9] text-ink sm:text-7xl lg:text-[5.6rem]">
+          A cooler home and a
+          <span class="text-petrol"> lower power bill</span>, done in a day.
+        </h1>
+        <p class="lead mt-6 max-w-xl">
+          Family-run since 2006. Spray foam, blown-in, batt &amp; roll, radiant barrier, removal and replacement across
+          Jackson County — honest numbers, no job too big or too small.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href={cta.href} class="btn btn-coral">{cta.label} <ArrowRight class="size-4" /></a>
+          <a href={`tel:${business.phoneHref}`} class="btn btn-outline">
+            <Phone class="size-4" /> {business.phone}
+          </a>
+        </div>
+        <ul class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+          {
+            proof.map((p) => (
+              <li class="flex items-center gap-2 text-sm font-medium text-ink-soft">
+                <span class="grid size-6 place-items-center rounded-full bg-petrol/10 text-petrol">
+                  <Icon name={p.icon} class="size-3.5" />
+                </span>
+                {p.label}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative lg:col-span-6">
+        <div class="duotone aspect-[4/5] w-full shadow-lift sm:aspect-[5/4] lg:aspect-[4/5]">
+          <img
+            src="/photos/fleet.jpg"
+            alt="A Plus Insulation service trucks parked at a Florida Panhandle job site"
+            width="2048"
+            height="1482"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        {/* Floating soft stat chip */}
+        <div class="surface absolute -bottom-6 -left-4 flex items-center gap-3 px-5 py-4 sm:-left-8">
+          <span class="grid size-11 place-items-center rounded-2xl bg-petrol/12 text-petrol">
+            <HandCoins class="size-6" />
+          </span>
+          <span>
+            <span class="block font-display text-2xl font-semibold leading-none text-ink">~15%</span>
+            <span class="mt-1 block text-xs text-muted">lower heating &amp; cooling</span>
+          </span>
+        </div>
+        <div class="surface absolute -right-3 top-6 hidden items-center gap-2 px-4 py-3 sm:flex">
+          <span class="flex gap-0.5 text-honey">
+            {Array.from({ length: 5 }).map(() => <Star class="size-4 fill-current" />)}
+          </span>
+          <span class="text-sm font-semibold text-ink">Local 5★ reviews</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== 2 · STATS ===================== */}
+  <section class="px-4 py-16 lg:px-5 lg:py-24">
+    <div class="mx-auto grid max-w-[84rem] gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        stats.map((s, i) => (
+          <div class="surface surface-lift p-7" data-reveal>
+            <p class:list={['font-display text-5xl font-semibold leading-none', statColors[i]]}>{s.n}</p>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{s.l}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* ===================== 3 · PROBLEM / SOLUTION ===================== */}
+  <section class="px-4 py-8 lg:px-5 lg:py-12">
+    <div class="mx-auto grid max-w-[84rem] items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div class="relative order-2 lg:order-1" data-reveal>
+        <div class="duotone duotone--soft aspect-[5/4] w-full shadow-lift">
+          <img
+            src="/photos/attic-foam.jpg"
+            alt="Spray foam insulation covering an attic roof deck in a Jackson County home"
+            loading="lazy"
+          />
+        </div>
+        <div class="surface absolute -right-4 -top-5 px-5 py-3">
+          <span class="font-display text-2xl font-semibold text-ink">130°F+</span>
+          <span class="mt-0.5 block text-xs text-muted">un-insulated attic, July</span>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2" data-reveal>
+        <span class="tag">The problem</span>
+        <h2 class="mt-5 text-5xl text-ink sm:text-[3.25rem] lg:text-[3.5rem]">Why Panhandle power bills run high</h2>
+        <p class="mt-6 leading-relaxed text-ink-soft">
+          On a July afternoon, an under-insulated attic here can top 130&deg;F. That heat radiates down through thin
+          insulation, leaks in around ducts and can lights, and bakes the rooms below — so the AC runs all day and the
+          bill climbs anyway. <span class="font-semibold text-ink">Air sealing plus the right insulation depth breaks
+          the cycle.</span>
+        </p>
+        <ul class="mt-8 grid gap-3.5 sm:grid-cols-2">
+          {
+            problemPoints.map((p) => (
+              <li class="flex items-start gap-3 text-[0.95rem]">
+                <span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-petrol/12 text-petrol">
+                  <Check class="size-4" />
+                </span>
+                <span class="text-ink">{p}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== 4 · SERVICES ===================== */}
+  <section id="services" class="scroll-mt-24 px-4 py-16 lg:px-5 lg:py-24">
+    <div class="mx-auto max-w-[84rem]">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between" data-reveal>
+        <div class="max-w-2xl">
+          <span class="tag">What we do</span>
+          <h2 class="mt-5 text-5xl text-ink sm:text-[3.25rem] lg:text-[3.5rem]">Whole-home insulation, done right</h2>
+        </div>
+        <p class="max-w-sm text-ink-soft">
+          Six services, one standard. We measure what your house needs and tell you straight which job pays back fastest.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          services.map((s) => (
+            <article class="surface surface-lift group flex flex-col p-7" data-reveal>
+              <span class="grid size-14 place-items-center rounded-2xl bg-petrol/10 text-petrol transition-colors group-hover:bg-petrol group-hover:text-cream">
+                <Icon name={s.icon} class="size-7" />
+              </span>
+              <h3 class="mt-6 text-2xl font-bold text-ink">{s.title.replace(' Insulation', '')}</h3>
+              <p class="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-muted">{s.short}</p>
+              <a
+                href={`/services/#${s.id}`}
+                class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-petrol transition-colors group-hover:text-petrol-soft"
+              >
+                Learn more <ArrowRight class="size-4" />
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== 5 · BEFORE / AFTER ===================== */}
+  <section class="px-4 py-16 lg:px-5 lg:py-24">
+    <div class="mx-auto max-w-[84rem]">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div data-reveal>
+          <span class="tag">The difference</span>
+          <h2 class="mt-5 text-5xl text-ink sm:text-[3.25rem] lg:text-[3.5rem]">Feel it in the attic first</h2>
+          <p class="mt-6 leading-relaxed text-ink-soft">
+            Air sealing and the right R-value turn a 130&deg;F attic into one your AC can keep up with. Drag the slider
+            to see the same Marianna attic on a July afternoon, before and after.
+          </p>
+          <p class="mt-4 text-sm text-muted">
+            Illustrative · attic temp, ~3&nbsp;PM July · un-insulated (R-11) vs air-sealed to R-38.
+          </p>
+        </div>
+        <div data-reveal>
+          <BeforeAfter
+            client:visible
+            beforeSrc="/photos/attic-foam.jpg"
+            afterSrc="/photos/attic-foam.jpg"
+            beforeAlt="Under-insulated Marianna attic running hot on a summer afternoon"
+            afterAlt="Same attic after spray foam air sealing to R-38, running cool"
+            beforeStat="131°F · R-11"
+            afterStat="78°F · R-38"
+            beforeOverlay="bg-gradient-to-t from-coral/55 via-coral/25 to-transparent mix-blend-multiply"
+            afterOverlay="bg-gradient-to-t from-petrol/55 via-petrol/20 to-transparent mix-blend-multiply"
+          />
+        </div>
+      </div>
+
+      <div class="mt-16">
+        <span class="tag" data-reveal>Our work · across the Panhandle</span>
+        <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4" data-reveal>
+          {
+            gallery.map((g) => (
+              <figure class="group overflow-hidden rounded-3xl shadow-soft">
+                <div class="duotone duotone--soft aspect-[4/5] w-full rounded-none">
+                  <img src={`/photos/${g.f}`} alt={g.a} loading="lazy" class="transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <figcaption class="bg-cream px-4 py-3 text-[0.8rem] font-medium text-muted">{g.c}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== 7 · PROCESS ===================== */}
+  <section class="px-4 py-8 lg:px-5 lg:py-12">
+    <div class="relative mx-auto max-w-[84rem] overflow-hidden rounded-[2.5rem] bg-ink text-cream shadow-lift">
+      <div class="relative p-8 lg:p-14">
+        <div class="max-w-2xl" data-reveal>
+          <span class="tag tag-light">How it works</span>
+          <h2 class="mt-5 text-5xl sm:text-[3.25rem] lg:text-[3.5rem]">What happens when you call</h2>
+        </div>
+        <ol class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            process.map((step, i) => (
+              <li class="relative" data-reveal>
+                <span class="grid size-12 place-items-center rounded-2xl bg-coral font-display text-xl font-semibold text-ink">
+                  {i + 1}
+                </span>
+                <h3 class="mt-5 text-xl font-bold text-cream">{step.t}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-cream/70">{step.d}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== 8 · SERVICE AREA ===================== */}
+  <section class="px-4 py-16 lg:px-5 lg:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <span class="tag mx-auto w-fit" data-reveal>Where we work</span>
+      <h2 class="mt-5 text-5xl text-ink sm:text-[3.25rem] lg:text-[3.5rem]" data-reveal>Serving Marianna &amp; Jackson County</h2>
+      <div class="mt-9 flex flex-wrap justify-center gap-2.5" data-reveal>
+        {
+          serviceAreaChips.map((town) => (
+            <span class="rounded-full bg-cream px-4 py-2 text-sm font-medium text-ink shadow-soft">{town}</span>
+          ))
+        }
+      </div>
+      <p class="mt-8 text-ink-soft" data-reveal>
+        Not sure if we reach you?{' '}
+        <a href="/service-area/" class="font-semibold text-petrol underline underline-offset-4">Check the full area</a>{' '}
+        or call{' '}
+        <a href={`tel:${business.phoneHref}`} class="font-semibold text-petrol underline underline-offset-4">{business.phone}</a>.
+      </p>
+    </div>
+  </section>
+
+  {/* ===================== 9 · REVIEWS ===================== */}
+  <section class="px-4 py-8 lg:px-5 lg:py-12">
+    <div class="mx-auto max-w-[84rem]">
+      <div class="max-w-2xl" data-reveal>
+        <span class="tag">Reviews</span>
+        <h2 class="mt-5 text-5xl text-ink sm:text-[3.25rem] lg:text-[3.5rem]">What neighbors say</h2>
+      </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          testimonials.map((t) => (
+            <figure class="surface flex flex-col p-8" data-reveal>
+              <div class="flex gap-0.5 text-honey" aria-label={`${t.rating} out of 5 stars`}>
+                {Array.from({ length: t.rating }).map(() => <Star class="size-5 fill-current" />)}
+              </div>
+              <blockquote class="mt-5 flex-1 text-lg leading-relaxed text-ink">“{t.quote}”</blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <span class="grid size-10 place-items-center rounded-full bg-petrol/10 font-display font-semibold text-petrol">
+                  {t.author.charAt(0)}
+                </span>
+                <span>
+                  <span class="block font-semibold text-ink">{t.author}</span>
+                  <span class="block text-sm text-muted">{t.role}</span>
+                </span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== 10 · FAQ ===================== */}
+  <section class="px-4 py-16 lg:px-5 lg:py-24">
+    <div class="mx-auto grid max-w-[84rem] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <div data-reveal>
+        <span class="tag">FAQ</span>
+        <h2 class="mt-5 text-5xl text-ink sm:text-[3.25rem] lg:text-[3.5rem]">Questions homeowners actually ask</h2>
+        <p class="mt-6 leading-relaxed text-ink-soft">
+          Straight answers to what we hear most. Still wondering something? Ask us on the estimate — there’s no charge to
+          find out.
+        </p>
+        <a href={cta.href} class="btn btn-petrol mt-8">Ask on my free estimate <ArrowRight class="size-4" /></a>
+      </div>
+      <div class="surface p-3 sm:p-6" data-reveal>
+        <Faq client:visible items={faqs} />
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== 11 · FINAL CTA ===================== */}
+  <CtaBand />
+</Base>

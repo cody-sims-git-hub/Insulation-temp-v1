@@ -1,0 +1,40 @@
+---
+import {
+  Shield,
+  Wind,
+  Layers,
+  Sun,
+  Recycle,
+  House,
+  ShieldCheck,
+  Leaf,
+  MapPin,
+  Check,
+  Clock3,
+  HandCoins,
+} from 'lucide-astro';
+
+const map: Record<string, any> = {
+  shield: Shield,
+  wind: Wind,
+  layers: Layers,
+  sun: Sun,
+  recycle: Recycle,
+  home: House,
+  'shield-check': ShieldCheck,
+  leaf: Leaf,
+  pin: MapPin,
+  check: Check,
+  clock: Clock3,
+  coins: HandCoins,
+};
+
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = 'size-6' } = Astro.props;
+const Cmp = map[name] ?? Shield;
+---
+
+<Cmp class={className} />

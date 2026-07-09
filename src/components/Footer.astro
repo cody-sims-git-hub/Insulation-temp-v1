@@ -1,0 +1,78 @@
+---
+import { Phone, MapPin, Clock, Facebook, ArrowUpRight } from 'lucide-astro';
+import HeatLines from '@/components/HeatLines.astro';
+import { business, nav, services, cta } from '@/data/site';
+
+const year = 2026;
+---
+
+<footer class="px-3 pb-3 lg:px-5 lg:pb-5">
+  <div class="relative mx-auto max-w-[84rem] overflow-hidden rounded-[2rem] bg-petrol-2 text-cream">
+    <HeatLines class="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 w-full text-mist" opacity={0.12} />
+    <div class="relative px-6 py-14 lg:px-12 lg:py-20">
+      <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+        <div>
+          <div class="flex items-center">
+            <span class="inline-flex items-center rounded-xl bg-ink px-3.5 py-2.5">
+              <img src="/photos/logo-wide.png" alt="A Plus Insulation" width="170" height="68" class="h-8 w-auto" />
+            </span>
+          </div>
+          <p class="mt-5 max-w-xs leading-relaxed text-cream/70">
+            Family-run insulation contractor in Marianna, FL. Keeping Jackson County homes comfortable and efficient since {business.founded}.
+          </p>
+          <a href={cta.href} class="btn btn-coral mt-7">{cta.label}</a>
+        </div>
+
+        <nav aria-label="Footer">
+          <p class="text-sm font-semibold text-honey">Pages</p>
+          <ul class="mt-4 space-y-2.5">
+            <li><a href="/" class="text-cream/75 transition-colors hover:text-cream">Home</a></li>
+            {nav.map((item) => (
+              <li><a href={item.href} class="text-cream/75 transition-colors hover:text-cream">{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="Services">
+          <p class="text-sm font-semibold text-honey">Services</p>
+          <ul class="mt-4 space-y-2.5">
+            {services.map((s) => (
+              <li>
+                <a href={`/services/#${s.id}`} class="text-cream/75 transition-colors hover:text-cream">{s.title.replace(' Insulation', '')}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <p class="text-sm font-semibold text-honey">Get in touch</p>
+          <ul class="mt-4 space-y-4 text-sm">
+            <li class="flex items-start gap-3">
+              <Phone class="mt-0.5 size-4 shrink-0 text-honey" />
+              <a href={`tel:${business.phoneHref}`} class="font-semibold text-cream transition-colors hover:text-honey">{business.phone}</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <MapPin class="mt-0.5 size-4 shrink-0 text-honey" />
+              <span class="text-cream/75">{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postal}</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <Clock class="mt-0.5 size-4 shrink-0 text-honey" />
+              <span class="text-cream/75">Mon–Fri 8–5 · Sat–Sun closed</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <Facebook class="mt-0.5 size-4 shrink-0 text-honey" />
+              <a href={business.facebook} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-cream/75 transition-colors hover:text-cream">
+                Facebook <ArrowUpRight class="size-3.5" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-14 flex flex-col gap-2 border-t border-cream/15 pt-6 text-sm text-cream/50 sm:flex-row sm:items-center sm:justify-between">
+        <p>© {year} {business.name}. Licensed &amp; insured.</p>
+        <p>Marianna · Jackson County · NW Florida Panhandle</p>
+      </div>
+    </div>
+  </div>
+</footer>
