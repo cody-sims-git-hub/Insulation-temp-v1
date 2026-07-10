@@ -5,7 +5,7 @@ import HeatLines from '@/components/HeatLines.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
 import Faq from '@/components/Faq.tsx';
 import BeforeAfter from '@/components/BeforeAfter.tsx';
-import { ArrowRight, Phone, Check, Star, HandCoins } from 'lucide-astro';
+import { ArrowRight, Phone, Check, Star } from 'lucide-astro';
 import {
   business,
   cta,
@@ -73,16 +73,6 @@ const statColors = ['text-petrol', 'text-ink', 'text-petrol', 'text-ink'];
             loading="eager"
             fetchpriority="high"
           />
-        </div>
-        {/* Floating soft stat chip */}
-        <div class="surface absolute -bottom-6 -left-4 flex items-center gap-3 px-5 py-4 sm:-left-8">
-          <span class="grid size-11 place-items-center rounded-2xl bg-petrol/12 text-petrol">
-            <HandCoins class="size-6" />
-          </span>
-          <span>
-            <span class="block font-display text-2xl font-semibold leading-none text-ink">~15%</span>
-            <span class="mt-1 block text-xs text-muted">lower heating &amp; cooling</span>
-          </span>
         </div>
         <div class="surface absolute -right-3 top-6 hidden items-center gap-2 px-4 py-3 sm:flex">
           <span class="flex gap-0.5 text-honey">
