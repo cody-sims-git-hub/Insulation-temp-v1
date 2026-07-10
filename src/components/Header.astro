@@ -7,9 +7,8 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
 ---
 
-<div class="px-3 pt-3 lg:px-5 lg:pt-4">
-  <header class="sticky top-3 z-40 lg:top-4">
-    <div class="mx-auto flex max-w-[84rem] items-center justify-between gap-4 rounded-full border border-ink/5 bg-cream/85 py-2.5 pl-3 pr-2.5 shadow-soft backdrop-blur-md lg:pl-4">
+<header class="sticky top-0 z-40 px-3 pt-3 lg:px-5 lg:pt-4">
+  <div class="mx-auto flex max-w-[84rem] items-center justify-between gap-4 rounded-full border border-ink/5 bg-cream/85 py-2.5 pl-3 pr-2.5 shadow-soft backdrop-blur-md lg:pl-4">
       <a href="/" class="flex items-center rounded-xl bg-ink px-3 py-2" aria-label="A Plus Insulation home">
         <img src="/photos/logo-wide.png" alt="A Plus Insulation" width="170" height="68" class="h-7 w-auto sm:h-8" />
       </a>
@@ -48,4 +47,3 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       />
     </div>
   </header>
-</div>
