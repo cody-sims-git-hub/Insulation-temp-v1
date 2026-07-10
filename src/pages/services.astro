@@ -7,6 +7,13 @@ import { ArrowRight } from 'lucide-astro';
 import { seo, services, process, cta } from '@/data/site';
 
 const applications = 'Attic · Ceilings · Interior & exterior walls · Floors · Crawlspace · Garage · Roof deck';
+const rValues = [
+  { m: 'Closed-cell spray foam', r: '~R-6.5', unit: 'per inch' },
+  { m: 'Open-cell spray foam', r: '~R-3.7', unit: 'per inch' },
+  { m: 'Blown-in fiberglass / cellulose', r: 'to R-38', unit: 'installed attic depth' },
+  { m: 'Batt & roll', r: 'R-30–R-38', unit: 'labeled rating' },
+  { m: 'Radiant barrier', r: 'Adds none', unit: 'reflects radiant heat' },
+];
 const photos: Record<string, string> = {
   'spray-foam': 'foam-walls.jpg',
   'blown-in': 'attic-foam.jpg',
@@ -66,14 +73,6 @@ const photos: Record<string, string> = {
               </ul>
             </div>
 
-            <div class="rounded-2xl bg-cream p-6 shadow-soft">
-              <p class="text-sm font-semibold uppercase tracking-wide text-muted">R-value guidance</p>
-              <p class="mt-2 flex flex-wrap items-baseline gap-3">
-                <span class="font-display text-5xl text-petrol">{s.rStat}</span>
-                <span class="flex-1 text-sm leading-relaxed text-muted">{s.rNote}</span>
-              </p>
-            </div>
-
             <div class="border-l-4 border-coral pl-5">
               <h3 class="text-lg font-bold text-ink">Honest tradeoffs</h3>
               <p class="mt-2 leading-relaxed text-ink-soft">{s.tradeoffs}</p>
@@ -113,10 +112,53 @@ const photos: Record<string, string> = {
           <h2 class="mt-4 text-4xl text-ink sm:text-5xl">Where we insulate</h2>
           <p class="mt-4 leading-relaxed text-ink-soft">{applications}</p>
           <p class="mt-4 leading-relaxed text-ink-soft">
-            New construction or existing home — we assess your space and recommend the right material and R-value for the
-            Panhandle climate.
+            New construction or existing home — we assess your space and recommend the right material and installed depth
+            for the Panhandle climate.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  {/* R-value reference chart */}
+  <section class="px-4 py-12 lg:px-5 lg:py-16">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <div class="rounded-[2rem] bg-cream p-8 shadow-lift lg:p-10">
+        <span class="tag">Reference</span>
+        <h2 class="mt-4 text-4xl text-ink sm:text-5xl">R-value at a glance</h2>
+        <p class="mt-4 leading-relaxed text-ink-soft">
+          R-value measures how well a material resists heat — the higher the number, the more insulating power. Here is
+          how the materials we install compare.
+        </p>
+
+        <div class="mt-8 overflow-x-auto">
+          <table class="w-full border-collapse text-left">
+            <thead>
+              <tr class="border-b border-ink/15 text-xs font-semibold uppercase tracking-wide text-muted">
+                <th class="py-3 pr-4">Material</th>
+                <th class="py-3 pl-4 text-right">R-value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                rValues.map((row) => (
+                  <tr class="border-b border-ink/10">
+                    <td class="py-4 pr-4 font-semibold text-ink">{row.m}</td>
+                    <td class="py-4 pl-4 text-right">
+                      <span class="font-display text-xl text-petrol">{row.r}</span>
+                      <span class="mt-0.5 block text-xs text-muted">{row.unit}</span>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-6 text-sm leading-relaxed text-muted">
+          Florida attic code calls for <span class="font-semibold text-ink">R-30 to R-38</span>. Many older Jackson
+          County attics measure R-11 or less — that gap is where the savings are.
+        </p>
       </div>
     </div>
   </section>
