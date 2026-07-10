@@ -16,9 +16,9 @@ type Props = {
 };
 
 /**
- * Before/after slider. Used here as an honest thermal comparison of the SAME
- * attic before and after air sealing + R-38 — labeled illustrative — which
- * frames comfort as a measurable temperature drop, the subject's own language.
+ * Before/after slider. Used here as an illustrative thermal comparison — a bare
+ * roof deck vs one sealed with spray foam — which frames comfort as a measurable
+ * temperature drop, the subject's own language.
  * Uses clip-path so neither image distorts at any slider position.
  */
 export default function BeforeAfter({
