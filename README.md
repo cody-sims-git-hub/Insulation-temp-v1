@@ -37,4 +37,4 @@ The service-area map geometry is projected from US Census county boundaries into
 
 ## Homepage
 
-![A Plus Insulation homepage](docs/homepage.png)
+![A Plus Insulation homepage](docs/homepage.jpg)
