@@ -263,8 +263,11 @@ export const testimonials = [
   },
 ] as const;
 
+/** Home-page "where we work" chips — a spread across the full service area. */
 export const serviceAreaChips = [
-  'Marianna', 'Sneads', 'Graceville', 'Chipley', 'Alford', 'Bonifay', 'Cottondale', 'Grand Ridge', 'Malone', 'Cypress',
+  'Marianna', 'Grand Ridge', 'Sneads', 'Chipley', 'Bonifay', 'DeFuniak Springs',
+  'Panama City', 'Panama City Beach', 'Blountstown', 'Bristol', 'Port St. Joe', 'Apalachicola',
+  'Quincy', 'Tallahassee', 'Crawfordville', 'Dothan', 'Enterprise', 'Bainbridge',
 ] as const;
 
 export const serviceAreaTowns = [

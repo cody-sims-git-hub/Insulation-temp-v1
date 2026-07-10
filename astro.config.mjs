@@ -10,6 +10,8 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://aplusinsulationllc.com',
   output: 'static',
+  // Hide the Astro dev toolbar (the floating pill in dev).
+  devToolbar: { enabled: false },
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
