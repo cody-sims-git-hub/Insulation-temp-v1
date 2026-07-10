@@ -66,8 +66,6 @@ export type Service = {
   short: string;
   what: string;
   best: string[];
-  rStat: string;
-  rNote: string;
   tradeoffs: string;
   faqs: { q: string; a: string }[];
 };
@@ -80,11 +78,8 @@ export const services: Service[] = [
     short:
       'Open- and closed-cell spray foam that seals air leaks and delivers the highest R-value per inch — ideal for Panhandle heat and humidity.',
     what:
-      'Spray polyurethane foam comes in two types — open cell and closed cell — and both do something no other insulation can: they seal air leaks and insulate in one step. The foam expands into cracks and gaps as it goes on, so conditioned air stays in and muggy Panhandle air stays out. It is the highest R-value per inch of any insulation we install.',
+      'Spray polyurethane foam comes in two types — open cell and closed cell — and both do something no other insulation can: they seal air leaks and insulate in one step. The foam expands into cracks and gaps as it goes on, so conditioned air stays in and muggy Panhandle air stays out. It packs the most insulating power into every inch of anything we install.',
     best: ['Attic roof decks', 'New-construction walls', 'Rim joists', 'Metal buildings'],
-    rStat: '~R-6.5',
-    rNote:
-      'per inch for closed cell; open cell runs ~R-3.7 per inch — the highest R-value per inch available. Florida attic code calls for R-30–R-38.',
     tradeoffs:
       "It's the premium option. And one thing most contractors won't mention: when foam covers a roof deck, some lenders and home inspectors ask questions at sale or re-roof time. We walk you through venting and inspection-access choices up front so there are no surprises.",
     faqs: [
@@ -94,7 +89,7 @@ export const services: Service[] = [
       },
       {
         q: 'Is spray foam better than fiberglass?',
-        a: "It seals air leaks, which fiberglass can't do, and it packs more R-value into every inch. Fiberglass wins on budget — it insulates well for a fraction of the cost when it's installed right. Which is better depends on your house and your budget, and we'll tell you which one we'd pick for yours.",
+        a: "It seals air leaks, which fiberglass can't do, and it packs more insulating power into every inch. Fiberglass wins on budget — it insulates well for a fraction of the cost when it's installed right. Which is better depends on your house and your budget, and we'll tell you which one we'd pick for yours.",
       },
     ],
   },
@@ -107,9 +102,6 @@ export const services: Service[] = [
     what:
       "Loose-fill fiberglass or cellulose blown into the attic through a hose — fast, even, and gap-free. It flows around joists, wires, and odd framing where batts leave voids, and it can be installed right over your existing insulation. For most Panhandle attics, it's the most cost-effective top-up there is.",
     best: ['Attic floors', 'Top-ups over existing insulation', 'Older homes', 'Budget retrofits'],
-    rStat: 'R-38',
-    rNote:
-      'the attic target we blow to for most NW Florida homes — code calls for R-30–R-38, and we set the installed depth to get you there.',
     tradeoffs:
       "Blown-in doesn't air-seal by itself — that's why we seal penetrations around pipes, wires, and fixtures before the hose comes out. And loose fill settles slightly over time, so we account for that in the installed depth instead of blowing to the bare minimum.",
     faqs: [
@@ -130,11 +122,8 @@ export const services: Service[] = [
     short:
       'Fiberglass batts for walls, floors and new construction — a cost-effective, dependable standard.',
     what:
-      "Fiberglass batts and rolls are the classic — pre-cut blankets of insulation fitted between studs and joists. In open walls, floors, garages, and new construction, they're dependable, predictable, and the most budget-friendly way to hit a target R-value.",
+      "Fiberglass batts and rolls are the classic — pre-cut blankets of insulation fitted between studs and joists. In open walls, floors, garages, and new construction, they're dependable, predictable, and the most budget-friendly way to hit a target insulation level.",
     best: ['Open walls', 'Floors', 'Garages', 'New construction'],
-    rStat: 'R-30–R-38',
-    rNote:
-      "Florida's attic code range. Batts carry a fixed, labeled R-value — but the number on the package only holds if the fit is right.",
     tradeoffs:
       "Batt performance depends entirely on fit. A batt that's compressed, gapped, or stuffed around wiring underperforms its labeled rating — sometimes badly. That's why installation quality is the whole game, and why we cut around obstructions instead of cramming past them.",
     faqs: [
@@ -144,7 +133,7 @@ export const services: Service[] = [
       },
       {
         q: 'Batt or spray foam?',
-        a: 'Batts cost less than foam, and in an open wall they do the job well. Foam adds air sealing and a higher R-value per inch, which matters most at roof decks and rim joists. For many projects the honest answer is batts in the walls and foam where sealing counts.',
+        a: 'Batts cost less than foam, and in an open wall they do the job well. Foam adds air sealing and more insulating power per inch, which matters most at roof decks and rim joists. For many projects the honest answer is batts in the walls and foam where sealing counts.',
       },
     ],
   },
@@ -157,9 +146,6 @@ export const services: Service[] = [
     what:
       'A radiant barrier is reflective foil installed under the roof deck that turns back radiant heat before it cooks your attic. In a Florida summer that means a meaningful drop in attic temperature — and less heat soaking into your ductwork and ceilings. It complements insulation; it never replaces it.',
     best: ['Under the roof deck', 'Attics with AC ductwork', 'Florida summer heat', 'Pairing with blown-in'],
-    rStat: 'R-0',
-    rNote:
-      'a radiant barrier adds no R-value of its own. It blocks radiant heat instead — which is exactly why it works alongside insulation, never instead of it.',
     tradeoffs:
       "It's a summer specialist. A radiant barrier does its best work when the sun is beating on the roof; in winter the effect is modest. And it only pays off if your insulation is up to par first — foil over a thin attic is polish on a problem.",
     faqs: [
@@ -182,9 +168,6 @@ export const services: Service[] = [
     what:
       'When insulation gets wet, moldy, or visited by pests, it stops working and starts causing problems. We remove it safely — vacuum-and-bag, sealed on the way out — and haul it off. Removal is the right call after water damage, rodent infestation, fire or smoke damage, during a renovation, or when prepping an attic for spray foam.',
     best: ['Water-damaged insulation', 'Pest & rodent damage', 'Fire or smoke damage', 'Renovation prep', 'Before spray foam'],
-    rStat: 'R-11',
-    rNote:
-      'or less is what many older Jackson County attics measure. Removal clears the deck to rebuild toward the R-30–R-38 Florida code calls for.',
     tradeoffs:
       "Removal by itself doesn't save you a dime — it's step one, not the fix. And if your existing insulation is dry, clean, and pest-free, you may not need it at all: blowing new insulation over the old is cheaper and works fine. We'll tell you which situation you're in.",
     faqs: [
@@ -207,9 +190,6 @@ export const services: Service[] = [
     what:
       "Replacement is the full job: tear out what's up there, fix what caused the damage, and re-insulate to today's standard. For many pre-1990 homes in Jackson County it's the biggest single efficiency upgrade available. The signs it's time: insulation 20+ years old, bills climbing year over year, uneven room temperatures, or past roof and plumbing leaks.",
     best: ['Pre-1990 homes', '20+ year-old insulation', 'Homes with past leaks', 'Uneven rooms & climbing bills'],
-    rStat: 'R-38',
-    rNote:
-      'the sweet spot for our climate zone — Florida code calls for R-30–R-38 in attics, and replacement is the chance to hit it properly.',
     tradeoffs:
       "Replacement costs more than topping up, because you're paying for removal plus new material. If your existing insulation is healthy, a blown-in top-up gets you most of the benefit for less — we'll measure what's up there and tell you straight which job your attic actually needs.",
     faqs: [
@@ -219,7 +199,7 @@ export const services: Service[] = [
       },
       {
         q: 'Does attic insulation go bad?',
-        a: "It doesn't expire, but it does degrade. Moisture flattens it, pests contaminate it, and settling thins it out — and every one of those cuts its real R-value below the label. A twenty-minute look in the attic tells us whether yours is still doing its job.",
+        a: "It doesn't expire, but it does degrade. Moisture flattens it, pests contaminate it, and settling thins it out — and every one of those cuts its real performance below the label. A twenty-minute look in the attic tells us whether yours is still doing its job.",
       },
     ],
   },
@@ -280,7 +260,7 @@ export const serviceAreaTowns = [
 ] as const;
 
 /** Service area grouped by region — larger areas, with the towns in each. */
-export const serviceAreas = [
+export const serviceAreas: { area: string; state: string; home?: boolean; towns: string[] }[] = [
   {
     area: 'Jackson County',
     state: 'Florida',
