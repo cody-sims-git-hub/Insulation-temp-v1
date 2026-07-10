@@ -24,14 +24,15 @@ const photos: Record<string, string> = {
     lead="Spray foam, blown-in, batt & roll, radiant barrier, removal and replacement — with straight answers on the best insulation for Florida homes and what we would put in our own attic."
   />
 
-  {/* Jump nav */}
-  <nav class="sticky top-[84px] z-30 px-4 py-3 lg:px-5" aria-label="Jump to a service">
-    <div class="mx-auto flex max-w-[84rem] flex-wrap gap-2.5 rounded-full bg-cream/85 px-4 py-3 shadow-soft backdrop-blur-md">
+  {/* Service index — sits in flow under the hero and scrolls away with it */}
+  <nav class="px-4 pb-10 lg:px-5" aria-label="Jump to a service">
+    <div class="mx-auto flex max-w-[84rem] flex-wrap items-center gap-2.5 border-t border-ink/10 pt-7">
+      <span class="mr-1 text-sm font-semibold uppercase tracking-wide text-muted">Jump to</span>
       {
         services.map((s) => (
           <a
             href={`#${s.id}`}
-            class="inline-flex min-h-[40px] items-center rounded-full px-4 text-sm font-semibold text-ink-soft transition-colors hover:bg-petrol/10 hover:text-petrol"
+            class="inline-flex min-h-[40px] items-center rounded-full bg-cream px-4 text-sm font-semibold text-ink-soft shadow-soft transition-colors hover:bg-petrol hover:text-cream"
           >
             {s.title.replace(' Insulation', '')}
           </a>
@@ -105,7 +106,7 @@ const photos: Record<string, string> = {
     <div class="mx-auto max-w-[84rem]">
       <div class="grid overflow-hidden rounded-[2rem] shadow-lift md:grid-cols-2" data-reveal>
         <div class="duotone aspect-[4/3] w-full rounded-none md:aspect-auto md:h-full">
-          <img src="/photos/jobsite.jpg" alt="A Plus Insulation trucks at a Marianna, FL job site" loading="lazy" />
+          <img src="/photos/wall-insulation.jpg" alt="Fiberglass batt insulation being fitted into a stud wall cavity" loading="lazy" />
         </div>
         <div class="bg-cream p-8 lg:p-12">
           <span class="tag">Coverage</span>

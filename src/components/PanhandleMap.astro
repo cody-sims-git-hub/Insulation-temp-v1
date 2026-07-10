@@ -1,0 +1,569 @@
+---
+/**
+ * Interactive map of A Plus Insulation's service area. County geometry is
+ * projected from US Census boundaries (us-atlas, baked into panhandle-map.json
+ * at build time — zero runtime deps), so coastlines and county lines are
+ * accurate.
+ *
+ * The served counties form one contiguous block across the Florida Panhandle
+ * and up into south Alabama (Dothan, Enterprise) and southwest Georgia
+ * (Bainbridge). They sweep in from the Marianna home-base star on reveal, and
+ * the map pans and zooms (drag / scroll / pinch / buttons / keyboard).
+ *
+ * Palette hexes mirror the design tokens in global.css.
+ */
+import data from '@/data/panhandle-map.json';
+
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+
+const { W, H, marianna, stateLand, counties } = data;
+const [mx, my] = marianna;
+
+const served = counties.filter((c) => c.served);
+const context = counties.filter((c) => !c.served);
+
+// Stagger order: ripple out from Marianna, home county first.
+const order = new Map(
+  [...served]
+    .sort((a, b) => Math.hypot(a.cx - mx, a.cy - my) - Math.hypot(b.cx - mx, b.cy - my))
+    .map((c, i) => [c.id, i]),
+);
+
+// Every county is labeled by its county name. Per-county nudges (px) where
+// centroids crowd or fall in water.
+const LABEL_FIX: Record<string, { dx?: number; dy?: number }> = {
+  '12063': { dy: 21 }, // Jackson — sit the name below the home star
+  '12045': { dx: -2, dy: 4 }, // Gulf
+  '13253': { dy: -6 }, // Seminole — lift clear of Marianna / Decatur
+  '13087': { dx: 14 }, // Decatur — shift east off Seminole
+};
+---
+
+<figure class={`panmap ${className}`} data-reveal>
+  <div class="panmap-stage" tabindex="0" aria-label="Service-area map. Drag to pan, scroll or pinch to zoom, arrow keys to move.">
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      role="img"
+      aria-labelledby="panmap-title panmap-desc"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <title id="panmap-title">Map of the A Plus Insulation service area</title>
+      <desc id="panmap-desc">
+        A map centred on Marianna, Florida, in Jackson County, showing the counties A Plus
+        Insulation serves as one shaded block: across the Florida Panhandle from Walton and Bay east
+        to Leon, Wakulla and Franklin, north into Dothan and Enterprise, Alabama, and northeast into
+        Bainbridge, Georgia. Surrounding land and the Gulf of Mexico are shown for context.
+      </desc>
+
+      <!-- static Gulf backdrop (stays put while the map pans) -->
+      <rect x="0" y="0" width={W} height={H} fill="#c4d8da"></rect>
+
+      <g class="pm-zoomlayer">
+        <!-- land base: surrounding states -->
+        {stateLand.map((s) => <path d={s.d} fill="#e8e3d4" />)}
+
+        <!-- county lines across the whole region (context) -->
+        {
+          context.map((c) => (
+            <path
+              class="pm-context"
+              d={c.d}
+              fill="transparent"
+              stroke="#d3ccba"
+              stroke-width="0.6"
+              vector-effect="non-scaling-stroke"
+            >
+              <title>{c.name} County</title>
+            </path>
+          ))
+        }
+
+        <!-- counties we serve — staggered sweep from Marianna -->
+        {
+          served.map((c) => (
+            <path
+              class:list={['pan-served', { 'pan-home': c.jackson }]}
+              style={`--o:${order.get(c.id)}`}
+              d={c.d}
+              fill="#1f6a2b"
+              fill-opacity={c.jackson ? 0.62 : 0.4}
+              stroke="#1f6a2b"
+              stroke-width={c.jackson ? 1.8 : 1.2}
+              stroke-linejoin="round"
+              vector-effect="non-scaling-stroke"
+            >
+              <title>{c.name} County — we serve this area</title>
+            </path>
+          ))
+        }
+
+        <!-- crisp state outlines / coastline on top -->
+        {
+          stateLand.map((s) => (
+            <path d={s.d} fill="none" stroke="#a99f86" stroke-width="1.3" vector-effect="non-scaling-stroke" />
+          ))
+        }
+
+        <!-- orientation labels -->
+        <text x="196" y="30" class="pm-geo" text-anchor="middle">ALABAMA</text>
+        <text x="590" y="44" class="pm-geo" text-anchor="middle">GEORGIA</text>
+        <text x="232" y="450" class="pm-geo pm-geo--water" text-anchor="middle">GULF OF MEXICO</text>
+
+        <!-- county / town names -->
+        {
+          served
+            .filter((c) => c.cx > 34 && c.cx < 686 && c.cy > 22 && c.cy < 448)
+            .map((c) => {
+              const fx = LABEL_FIX[c.id] ?? {};
+              return (
+                <text
+                  x={c.cx + (fx.dx ?? 0)}
+                  y={c.cy + (fx.dy ?? 3)}
+                  text-anchor="middle"
+                  class:list={['pm-county', { 'pm-county--home': c.jackson }]}
+                >
+                  {c.name}
+                </text>
+              );
+            })
+        }
+
+        <!-- Marianna — home base, in Jackson County -->
+        <circle class="pm-ripple" cx={mx} cy={my} r="9" fill="none" stroke="#f2c40f" stroke-width="2"></circle>
+        <g transform={`translate(${mx} ${my})`}>
+          <path
+            d="M0,-12 L3.5,-3.7 L11.4,-3.7 L5.1,1.4 L7.1,9.5 L0,4.8 L-7.1,9.5 L-5.1,1.4 L-11.4,-3.7 L-3.5,-3.7 Z"
+            fill="#f2c40f"
+            stroke="#16170f"
+            stroke-width="1.3"
+            stroke-linejoin="round"></path>
+        </g>
+        <text x={mx} y={my - 15} text-anchor="middle" class="pm-home">Marianna</text>
+      </g>
+    </svg>
+
+    <div class="pm-controls">
+      <button type="button" class="pm-btn pm-in" aria-label="Zoom in">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+      </button>
+      <button type="button" class="pm-btn pm-out" aria-label="Zoom out">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" /></svg>
+      </button>
+      <button type="button" class="pm-btn pm-reset" aria-label="Reset map view">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v4h4" /></svg>
+      </button>
+    </div>
+
+    <p class="pm-hint" aria-hidden="true">Drag to pan · scroll to zoom</p>
+  </div>
+
+  <figcaption class="panmap-legend">
+    <span class="pm-key"><span class="pm-dot pm-dot--home"></span>Home base — Marianna</span>
+    <span class="pm-key"><span class="pm-dot pm-dot--served"></span>Counties we serve</span>
+  </figcaption>
+</figure>
+
+<style>
+  .panmap {
+    margin: 0;
+  }
+  .panmap-stage {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: #c4d8da;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #16170f 8%, transparent);
+    cursor: grab;
+    touch-action: none;
+  }
+  .panmap-stage:focus-visible {
+    outline: 3px solid var(--color-coral, #f2c40f);
+    outline-offset: 2px;
+  }
+  .panmap.is-panning .panmap-stage {
+    cursor: grabbing;
+  }
+  .panmap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .panmap :global(.pm-zoomlayer) {
+    will-change: transform;
+  }
+
+  /* Orientation + water labels */
+  .panmap :global(.pm-geo) {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    fill: #b0a488;
+  }
+  .panmap :global(.pm-geo--water) {
+    fill: #6f9296;
+    letter-spacing: 0.3em;
+  }
+
+  /* County / town names */
+  .panmap :global(.pm-county) {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    fill: #2b5730;
+    paint-order: stroke;
+    stroke: #eef3e8;
+    stroke-width: 2.6px;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+  .panmap :global(.pm-county--home) {
+    font-size: 10.5px;
+    font-weight: 800;
+    fill: #16490f;
+  }
+
+  /* Marianna label */
+  .panmap :global(.pm-home) {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    fill: #16170f;
+    paint-order: stroke;
+    stroke: #fbf9f2;
+    stroke-width: 3.5px;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  /* Hover: brighten the county under the cursor */
+  .panmap :global(.pan-served) {
+    transition: fill-opacity 0.2s ease;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .panmap :global(.pan-served:hover) {
+    fill-opacity: 0.78;
+  }
+
+  /* Controls */
+  .pm-controls {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .pm-btn {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: none;
+    border-radius: 0.6rem;
+    background: #fbf9f2;
+    color: #16170f;
+    box-shadow: 0 2px 6px -2px rgba(24, 32, 28, 0.35);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+  .pm-btn svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .pm-btn:hover {
+    background: #1f6a2b;
+    color: #fbf9f2;
+  }
+  .pm-btn:active {
+    transform: translateY(1px);
+  }
+  .pm-btn:focus-visible {
+    outline: 3px solid var(--color-coral, #f2c40f);
+    outline-offset: 2px;
+  }
+
+  .pm-hint {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.7rem;
+    margin: 0;
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, #16170f 62%, transparent);
+    color: #fbf9f2;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .panmap.is-zoomed .pm-hint,
+  .panmap.is-panning .pm-hint {
+    opacity: 0;
+  }
+
+  /* Staggered county sweep — only under JS, once revealed */
+  :global(.js) .panmap[data-reveal]:not(.is-visible) :global(.pan-served) {
+    opacity: 0;
+  }
+  .panmap.is-visible :global(.pan-served) {
+    animation: pm-county-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--o) * 55ms);
+  }
+  @keyframes pm-county-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Home-base ripple */
+  .panmap :global(.pm-ripple) {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .panmap.is-visible :global(.pm-ripple) {
+    animation: pm-ripple 2.8s ease-out infinite;
+    animation-delay: 1s;
+  }
+  @keyframes pm-ripple {
+    0% {
+      opacity: 0.7;
+      transform: scale(0.5);
+    }
+    70% {
+      opacity: 0;
+      transform: scale(3.4);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(3.4);
+    }
+  }
+
+  /* Legend */
+  .panmap-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    margin-top: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid color-mix(in srgb, #16170f 8%, transparent);
+  }
+  .pm-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #45473b;
+  }
+  .pm-dot {
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .pm-dot--home {
+    border-radius: 999px;
+    background: #f2c40f;
+    box-shadow: 0 0 0 3px color-mix(in srgb, #f2c40f 25%, transparent);
+  }
+  .pm-dot--served {
+    background: color-mix(in srgb, #1f6a2b 45%, #e8e3d4);
+    box-shadow: inset 0 0 0 1.5px #1f6a2b;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .panmap[data-reveal]:not(.is-visible) :global(.pan-served),
+    .panmap.is-visible :global(.pan-served) {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    .panmap.is-visible :global(.pm-ripple) {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const VB = { w: 720, h: 470 };
+  const MIN = 1;
+  const MAX = 6;
+
+  function initPanZoom(fig: Element) {
+    const stage = fig.querySelector<HTMLElement>('.panmap-stage');
+    const svg = fig.querySelector('svg');
+    const layer = fig.querySelector<SVGGElement>('.pm-zoomlayer');
+    if (!stage || !svg || !layer) return;
+
+    let scale = 1;
+    let tx = 0;
+    let ty = 0;
+    const pointers = new Map<number, { x: number; y: number }>();
+    let pinchDist = 0;
+    let last: DOMPoint | null = null;
+
+    const apply = () => {
+      scale = Math.min(MAX, Math.max(MIN, scale));
+      const minTx = VB.w * (1 - scale);
+      const minTy = VB.h * (1 - scale);
+      tx = Math.min(0, Math.max(minTx, tx));
+      ty = Math.min(0, Math.max(minTy, ty));
+      layer.setAttribute('transform', `translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${scale.toFixed(4)})`);
+      fig.classList.toggle('is-zoomed', scale > 1.02);
+    };
+
+    const toVB = (clientX: number, clientY: number) => {
+      const pt = svg.createSVGPoint();
+      pt.x = clientX;
+      pt.y = clientY;
+      return pt.matrixTransform(svg.getScreenCTM()!.inverse());
+    };
+
+    const zoomAt = (cx: number, cy: number, factor: number) => {
+      const prev = scale;
+      scale = Math.min(MAX, Math.max(MIN, scale * factor));
+      const k = scale / prev;
+      tx = cx - k * (cx - tx);
+      ty = cy - k * (cy - ty);
+      apply();
+    };
+
+    stage.addEventListener(
+      'wheel',
+      (e) => {
+        e.preventDefault();
+        const p = toVB(e.clientX, e.clientY);
+        zoomAt(p.x, p.y, e.deltaY < 0 ? 1.14 : 1 / 1.14);
+      },
+      { passive: false },
+    );
+
+    stage.addEventListener('pointerdown', (e) => {
+      // Let the zoom/reset buttons handle their own clicks — capturing the
+      // pointer here would swallow the click and pan instead.
+      if ((e.target as Element).closest?.('.pm-controls')) return;
+      stage.setPointerCapture(e.pointerId);
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      last = toVB(e.clientX, e.clientY);
+      fig.classList.add('is-panning');
+    });
+
+    stage.addEventListener('pointermove', (e) => {
+      if (!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      const pts = [...pointers.values()];
+      if (pts.length === 2) {
+        const d = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        const mid = toVB((pts[0].x + pts[1].x) / 2, (pts[0].y + pts[1].y) / 2);
+        if (pinchDist) zoomAt(mid.x, mid.y, d / pinchDist);
+        pinchDist = d;
+        last = null;
+      } else {
+        const p = toVB(e.clientX, e.clientY);
+        if (last) {
+          tx += p.x - last.x;
+          ty += p.y - last.y;
+          apply();
+        }
+        last = p;
+      }
+    });
+
+    const endPointer = (e: PointerEvent) => {
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) pinchDist = 0;
+      if (pointers.size === 0) {
+        last = null;
+        fig.classList.remove('is-panning');
+      } else {
+        const first = [...pointers.values()][0];
+        last = toVB(first.x, first.y);
+      }
+    };
+    stage.addEventListener('pointerup', endPointer);
+    stage.addEventListener('pointercancel', endPointer);
+
+    stage.addEventListener('keydown', (e) => {
+      const step = 40 / scale;
+      const c = { x: VB.w / 2, y: VB.h / 2 };
+      switch (e.key) {
+        case '+':
+        case '=':
+          zoomAt(c.x, c.y, 1.3);
+          break;
+        case '-':
+        case '_':
+          zoomAt(c.x, c.y, 1 / 1.3);
+          break;
+        case 'ArrowLeft':
+          tx += step;
+          apply();
+          break;
+        case 'ArrowRight':
+          tx -= step;
+          apply();
+          break;
+        case 'ArrowUp':
+          ty += step;
+          apply();
+          break;
+        case 'ArrowDown':
+          ty -= step;
+          apply();
+          break;
+        case '0':
+          scale = 1;
+          tx = 0;
+          ty = 0;
+          apply();
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+    });
+
+    const center = () => ({ x: VB.w / 2, y: VB.h / 2 });
+    fig.querySelector('.pm-in')?.addEventListener('click', () => {
+      const c = center();
+      zoomAt(c.x, c.y, 1.5);
+    });
+    fig.querySelector('.pm-out')?.addEventListener('click', () => {
+      const c = center();
+      zoomAt(c.x, c.y, 1 / 1.5);
+    });
+    fig.querySelector('.pm-reset')?.addEventListener('click', () => {
+      scale = 1;
+      tx = 0;
+      ty = 0;
+      apply();
+    });
+
+    apply();
+  }
+
+  const boot = () => document.querySelectorAll('.panmap').forEach(initPanZoom);
+  boot();
+  document.addEventListener('astro:after-swap', boot);
+</script>

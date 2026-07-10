@@ -1,40 +1,40 @@
-# A Plus Insulation — website
+# A Plus Insulation — Website
 
-Static, brand-forward lead-generation site for **A Plus Insulation** (Marianna, FL).
-Built with **Astro + Tailwind v4**, deployed static; WordPress is intended as the
-headless content source (content currently lives in `src/data/site.ts`, which is
-the seam to swap for WP REST/GraphQL reads at build time).
+Marketing and lead-generation site for **A Plus Insulation**, a family-run insulation
+contractor in Marianna, Florida (Jackson County & the NW Florida Panhandle).
 
-## Stack
+Built as a static site with **Astro + Tailwind CSS v4**. All customer-facing content
+(copy, services, service area, SEO) lives in `src/data/site.ts`.
 
-- **Astro** (static output) + **React islands** for the FAQ accordion, before/after
-  slider, quote form, and mobile nav.
-- **Tailwind v4** (CSS-first tokens in `src/styles/global.css`).
-- **Fonts:** Bebas Neue (display), Inter (body) — via Fontsource.
-- **Icons:** Lucide. **Components:** shadcn-style (Radix accordion).
+## Getting started
 
-## Brand
-
-Real A Plus Insulation identity: **green + yellow + black**, elevated. Logo art in
-`public/photos/logo-wide.png` (auto-trimmed from `logo.jpg`).
-
-## Develop
+Requires **Node 20+**.
 
 ```bash
-npm install
-npm run dev      # http://localhost:4321
-npm run build    # -> dist/
-npm run preview
+npm install      # install dependencies
+npm run dev      # start the dev server at http://localhost:4321
 ```
 
-## Content
+Other commands:
 
-Everything customer-facing (copy, NAP, services, FAQ, service area, SEO titles/meta)
-is in `src/data/site.ts`. SEO carried over from the prior build's 2026-07-07 keyword
-plan; LocalBusiness + FAQPage JSON-LD emitted from `src/layouts/Base.astro`.
+```bash
+npm run build    # build the static site to dist/
+npm run preview  # preview the production build locally
+```
 
-## Lead capture
+## Pages
 
-The quote form POSTs to `PUBLIC_LEAD_ENDPOINT` (a Cloudflare Worker / form endpoint)
-when set; otherwise it fails gracefully to a call-us prompt. This is the only
-dynamic ("requires a db") path — everything else is static.
+- **Home** — hero, trust points, process, cost table, FAQ
+- **Services** — spray foam, blown-in, batt & roll, radiant barrier, removal, replacement
+- **About** — the family, story, and commitments
+- **Service Area** — interactive, real-geometry map of the counties served across FL, AL & GA
+- **Contact** — free-estimate request
+
+The service-area map geometry is projected from US Census county boundaries into
+`src/data/panhandle-map.json`.
+
+---
+
+## Homepage
+
+![A Plus Insulation homepage](docs/homepage.png)

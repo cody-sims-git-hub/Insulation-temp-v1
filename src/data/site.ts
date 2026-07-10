@@ -276,6 +276,41 @@ export const serviceAreaTowns = [
   { t: 'Malone & Greenwood', d: 'North county farm country. Older homes up this way often have the most to gain from an attic top-up.' },
 ] as const;
 
+/** Service area grouped by region — larger areas, with the towns in each. */
+export const serviceAreas = [
+  {
+    area: 'Jackson County',
+    state: 'Florida',
+    home: true,
+    towns: ['Marianna', 'Sneads', 'Grand Ridge', 'Cottondale', 'Graceville', 'Alford', 'Malone', 'Campbellton', 'Greenwood'],
+  },
+  {
+    area: 'West Panhandle',
+    state: 'Florida',
+    towns: ['Chipley', 'Bonifay', 'DeFuniak Springs', 'Vernon', 'Ponce de Leon', 'Westville'],
+  },
+  {
+    area: 'Gulf Coast & river country',
+    state: 'Florida',
+    towns: ['Panama City', 'Panama City Beach', 'Lynn Haven', 'Blountstown', 'Bristol', 'Port St. Joe', 'Apalachicola', 'Wewahitchka'],
+  },
+  {
+    area: 'Tallahassee & the Big Bend',
+    state: 'Florida',
+    towns: ['Tallahassee', 'Quincy', 'Havana', 'Chattahoochee', 'Crawfordville', 'Midway'],
+  },
+  {
+    area: 'South Alabama',
+    state: 'Alabama',
+    towns: ['Dothan', 'Enterprise', 'Ozark', 'Geneva', 'Slocomb', 'Hartford'],
+  },
+  {
+    area: 'Southwest Georgia',
+    state: 'Georgia',
+    towns: ['Bainbridge', 'Donalsonville', 'Climax'],
+  },
+] as const;
+
 /** Home FAQ — real search queries (keyword plan); also feeds FAQPage JSON-LD. */
 export const faqs = [
   {
