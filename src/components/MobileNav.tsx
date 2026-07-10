@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Menu, X, Phone } from 'lucide-react';
 
 type Item = { label: string; href: string };
@@ -36,8 +37,10 @@ export default function MobileNav({
         <Menu className="size-5" aria-hidden />
       </button>
 
-      {open && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-canvas" role="dialog" aria-modal="true">
+      {open &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <div className="fixed inset-0 z-50 flex flex-col bg-canvas" role="dialog" aria-modal="true">
           <div className="flex items-center justify-between px-5 py-4">
             <span className="font-display text-xl font-semibold text-ink">Menu</span>
             <button
@@ -69,8 +72,9 @@ export default function MobileNav({
               <Phone className="size-4" aria-hidden /> {phone}
             </a>
           </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
