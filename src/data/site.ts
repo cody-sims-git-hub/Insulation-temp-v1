@@ -12,13 +12,13 @@ export const business = {
   name: 'A Plus Insulation',
   tagline: 'A warmer, cooler, more efficient home',
   founded: 2006,
-  phone: '(850) 209-2636',
-  phoneHref: '+18502092636',
-  email: 'info@aplusinsulationllc.com',
-  address: { street: '5319 Hwy 90', city: 'Marianna', region: 'FL', postal: '32446' },
-  mapsUrl: 'https://maps.google.com/?q=5319+Hwy+90+Marianna+FL+32446',
-  mapsEmbed: 'https://www.google.com/maps?q=Marianna,+FL+32446&output=embed',
-  facebook: 'https://www.facebook.com/aplusinsulationllc',
+  phone: '(850) 555-0100',
+  phoneHref: '+18505550100',
+  email: 'info@example.com',
+  address: { street: '1234 Main St', city: 'Your City', region: 'FL', postal: '32446' },
+  mapsUrl: 'https://maps.google.com/?q=1234+Main+St+Your+City+FL+32446',
+  mapsEmbed: 'https://www.google.com/maps?q=Your+City,+FL+32446&output=embed',
+  facebook: 'https://www.facebook.com/example',
   hours: [
     { day: 'Monday', time: '8:00 AM – 5:00 PM', closed: false },
     { day: 'Tuesday', time: '8:00 AM – 5:00 PM', closed: false },
@@ -188,7 +188,7 @@ export const services: Service[] = [
     short:
       'Full tear-out and re-insulation to restore comfort and lower energy bills in older homes.',
     what:
-      "Replacement is the full job: tear out what's up there, fix what caused the damage, and re-insulate to today's standard. For many pre-1990 homes in Jackson County it's the biggest single efficiency upgrade available. The signs it's time: insulation 20+ years old, bills climbing year over year, uneven room temperatures, or past roof and plumbing leaks.",
+      "Replacement is the full job: tear out what's up there, fix what caused the damage, and re-insulate to today's standard. For many pre-1990 homes in Random County it's the biggest single efficiency upgrade available. The signs it's time: insulation 20+ years old, bills climbing year over year, uneven room temperatures, or past roof and plumbing leaks.",
     best: ['Pre-1990 homes', '20+ year-old insulation', 'Homes with past leaks', 'Uneven rooms & climbing bills'],
     tradeoffs:
       "Replacement costs more than topping up, because you're paying for removal plus new material. If your existing insulation is healthy, a blown-in top-up gets you most of the benefit for less — we'll measure what's up there and tell you straight which job your attic actually needs.",
@@ -213,84 +213,84 @@ export const process = [
 ] as const;
 
 export const gallery = [
-  { f: 'attic-foam.jpg', c: 'Spray foam attic — Jackson County', a: 'Spray foam and batt insulation on an attic roof deck and wall in a Jackson County home' },
-  { f: 'foam-walls.jpg', c: 'Foamed walls & ceiling — Marianna', a: 'Closed-cell spray foam insulation across the interior walls and ceiling of a Marianna building' },
+  { f: 'attic-foam.jpg', c: 'Spray foam attic — Random County', a: 'Spray foam and batt insulation on an attic roof deck and wall in a Random County home' },
+  { f: 'foam-walls.jpg', c: 'Foamed walls & ceiling — Your City', a: 'Closed-cell spray foam insulation across the interior walls and ceiling of a Your City building' },
   { f: 'foam-ceiling.jpg', c: 'Ceiling spray foam — Panhandle', a: 'Spray foam insulation applied to a ceiling and roof deck on a NW Florida job site' },
-  { f: 'jobsite.jpg', c: 'On site — Hwy 90, Marianna', a: 'A Plus Insulation truck and equipment on a job site along Hwy 90 in Marianna' },
+  { f: 'jobsite.jpg', c: 'On site — Your City', a: 'A Plus Insulation truck and equipment on a job site in Your City' },
 ] as const;
 
 export const testimonials = [
   {
     author: 'Danielle W.',
-    role: 'Marianna, FL',
+    role: 'Your City, FL',
     rating: 5,
     quote:
       'They insulated our attic with spray foam and the difference was immediate — the house holds its cool and our power bill dropped. Professional crew, fair price.',
   },
   {
     author: 'Robert M.',
-    role: 'Grand Ridge, FL',
+    role: 'Grand River, FL',
     rating: 5,
     quote:
       'Removed the old nasty insulation and blew in new. On time, cleaned up after themselves, no job too big or too small like they say.',
   },
   {
     author: 'Sheila T.',
-    role: 'Chipley, FL',
+    role: 'Chandler, FL',
     rating: 5,
     quote:
-      'Honest, local, and did exactly what they promised. Highly recommend A Plus for anyone in Jackson County.',
+      'Honest, local, and did exactly what they promised. Highly recommend A Plus for anyone in Random County.',
   },
 ] as const;
 
 /** Home-page "where we work" chips — a spread across the full service area. */
 export const serviceAreaChips = [
-  'Marianna', 'Grand Ridge', 'Sneads', 'Chipley', 'Bonifay', 'DeFuniak Springs',
-  'Panama City', 'Panama City Beach', 'Blountstown', 'Bristol', 'Port St. Joe', 'Apalachicola',
-  'Quincy', 'Tallahassee', 'Crawfordville', 'Dothan', 'Enterprise', 'Bainbridge',
+  'Your City', 'Grand River', 'Sandy Creek', 'Chandler', 'Brookhaven', 'Fenwick Springs',
+  'Bay City', 'Bay City Beach', 'Bluffton', 'Brixton', 'Port Sterling', 'Applewood',
+  'Quinby', 'Capitol City', 'Crawford', 'Dorset', 'Easton', 'Brambleton',
 ] as const;
 
 export const serviceAreaTowns = [
-  { t: 'Marianna', d: 'Home base. Our shop sits on Hwy 90 in the middle of town, so most Marianna estimates happen fast.' },
-  { t: 'Sneads & Grand Ridge', d: 'East Jackson County, out toward the river — a straight run down US-90 from the shop.' },
-  { t: 'Graceville & Campbellton', d: 'North toward the Alabama line. We cover the whole top of the county.' },
-  { t: 'Chipley & Bonifay', d: 'West into Washington and Holmes counties — Panhandle neighbors we work in regularly.' },
-  { t: 'Alford & Cottondale', d: 'Along US-231 just south and west of Marianna — some of our shortest drives.' },
-  { t: 'Malone & Greenwood', d: 'North county farm country. Older homes up this way often have the most to gain from an attic top-up.' },
+  { t: 'Your City', d: 'Home base. Our shop sits right in the middle of town, so most Your City estimates happen fast.' },
+  { t: 'Sandy Creek & Grand River', d: 'East Random County, out toward the river — a straight run down the highway from the shop.' },
+  { t: 'Grayson & Campton', d: 'North toward the Alabama line. We cover the whole top of the county.' },
+  { t: 'Chandler & Brookhaven', d: 'West into the neighboring counties — Panhandle neighbors we work in regularly.' },
+  { t: 'Ashford & Cottonwood', d: 'Just south and west of Your City — some of our shortest drives.' },
+  { t: 'Melrose & Greenfield', d: 'North county farm country. Older homes up this way often have the most to gain from an attic top-up.' },
 ] as const;
 
 /** Service area grouped by region — larger areas, with the towns in each. */
 export const serviceAreas: { area: string; state: string; home?: boolean; towns: string[] }[] = [
   {
-    area: 'Jackson County',
+    area: 'Random County',
     state: 'Florida',
     home: true,
-    towns: ['Marianna', 'Sneads', 'Grand Ridge', 'Cottondale', 'Graceville', 'Alford', 'Malone', 'Campbellton', 'Greenwood'],
+    towns: ['Your City', 'Sandy Creek', 'Grand River', 'Cottonwood', 'Grayson', 'Ashford', 'Melrose', 'Campton', 'Greenfield'],
   },
   {
     area: 'West Panhandle',
     state: 'Florida',
-    towns: ['Chipley', 'Bonifay', 'DeFuniak Springs', 'Vernon', 'Ponce de Leon', 'Westville'],
+    towns: ['Chandler', 'Brookhaven', 'Fenwick Springs', 'Verona', 'Pineville', 'Westbrook'],
   },
   {
     area: 'Gulf Coast & river country',
     state: 'Florida',
-    towns: ['Panama City', 'Panama City Beach', 'Lynn Haven', 'Blountstown', 'Bristol', 'Port St. Joe', 'Apalachicola', 'Wewahitchka'],
+    towns: ['Bay City', 'Bay City Beach', 'Lynnwood', 'Bluffton', 'Brixton', 'Port Sterling', 'Applewood', 'Willowbrook'],
   },
   {
-    area: 'Tallahassee & the Big Bend',
+    area: 'Capitol City & the Big Bend',
     state: 'Florida',
-    towns: ['Tallahassee', 'Quincy', 'Havana', 'Chattahoochee', 'Crawfordville', 'Midway'],
+    towns: ['Capitol City', 'Quinby', 'Haverford', 'Chatham', 'Crawford', 'Midvale'],
   },
   {
     area: 'South Alabama',
     state: 'Alabama',
-    towns: ['Dothan', 'Enterprise', 'Ozark', 'Geneva', 'Slocomb', 'Hartford'],
+    towns: ['Dorset', 'Easton', 'Oakridge', 'Glenville', 'Stanton', 'Hartwell'],
   },
   {
     area: 'Southwest Georgia',
     state: 'Georgia',
-    towns: ['Bainbridge', 'Donalsonville', 'Climax'],
+    towns: ['Brambleton', 'Donaldson', 'Clifton'],
   },
 ] as const;
 
@@ -310,7 +310,7 @@ export const faqs = [
   },
   {
     q: 'What R-value is required in Florida?',
-    a: 'Florida code calls for R-30 to R-38 in attics, and R-38 is the sweet spot for most homes in our climate zone. Many older Jackson County homes measure R-11 or less — that gap is where the savings are.',
+    a: 'Florida code calls for R-30 to R-38 in attics, and R-38 is the sweet spot for most homes in our climate zone. Many older Random County homes measure R-11 or less — that gap is where the savings are.',
   },
   {
     q: 'Does attic insulation help in summer?',
@@ -330,11 +330,11 @@ export const faqs = [
 export const about = {
   hero: {
     eyebrow: 'About',
-    title: 'Your Local Insulation Experts in Marianna, Florida',
-    lead: 'Family-run since 2006. A Plus Insulation has spent two decades keeping Jackson County homes comfortable and efficient — one honest job at a time.',
+    title: 'Your Local Insulation Experts in Your City, Florida',
+    lead: 'Family-run since 2006. A Plus Insulation has spent two decades keeping Random County homes comfortable and efficient — one honest job at a time.',
   },
   intro: [
-    'A Plus Insulation is a family-owned insulation contractor based in Marianna, Florida. Since 2006 we have helped homeowners and builders across Jackson County and the Panhandle make their homes more comfortable and far more efficient.',
+    'A Plus Insulation is a family-owned insulation contractor based in Your City, Florida. Since 2006 we have helped homeowners and builders across Random County and the Panhandle make their homes more comfortable and far more efficient.',
     'We install every major type of insulation — spray foam, blown-in, batt and roll, and radiant barrier — and we handle removal and replacement of old or damaged material. Whatever the project, we show up on time, do clean work, and stand behind it.',
   ],
   values: [
@@ -343,7 +343,7 @@ export const about = {
     { i: 'leaf', t: 'Efficiency first', d: 'Right materials, right R-value for our climate.' },
   ],
   story: [
-    'A Plus Insulation started in 2006 with a simple idea: do the work right, quote a fair number, and let the results speak for themselves. Two decades later we’re still family-run and still working out of our home base on Hwy 90 in Marianna — the same county we started in.',
+    'A Plus Insulation started in 2006 with a simple idea: do the work right, quote a fair number, and let the results speak for themselves. Two decades later we’re still family-run and still working out of our home base in Your City — the same county we started in.',
     'That matters more than it sounds. When your insulation contractor lives where you work, the job isn’t done when the invoice is paid. We run into our customers at the grocery store and the ball field, and every attic we insulate carries our name for the next twenty years.',
   ],
   commitments: [
@@ -362,28 +362,28 @@ export const about = {
 /** Per-page SEO — titles + meta descriptions preserved from the keyword plan. */
 export const seo = {
   home: {
-    title: 'Insulation Contractor in Marianna, FL | A Plus Insulation',
+    title: 'Insulation Contractor in Your City, FL | A Plus Insulation',
     description:
-      'Spray foam, blown-in & batt insulation for Jackson County homes. A Plus Insulation in Marianna, FL — free estimates. Call (850) 209-2636.',
+      'Spray foam, blown-in & batt insulation for Random County homes. A Plus Insulation in Your City, FL — free estimates. Call (850) 555-0100.',
   },
   services: {
-    title: 'Insulation Services in Marianna, FL | Spray Foam & More',
+    title: 'Insulation Services in Your City, FL | Spray Foam & More',
     description:
-      'Attic insulation services in Marianna, FL: spray foam, blown-in, batt & roll, radiant barrier, removal & replacement. Free estimates in Jackson County.',
+      'Attic insulation services in Your City, FL: spray foam, blown-in, batt & roll, radiant barrier, removal & replacement. Free estimates in Random County.',
   },
   about: {
-    title: 'About A Plus Insulation | Marianna, FL Insulation Pros',
+    title: 'About A Plus Insulation | Your City, FL Insulation Pros',
     description:
-      'Local, family-run insulation contractor in Marianna, FL. Licensed & insured, serving Jackson County homeowners with honest work and fair prices.',
+      'Local, family-run insulation contractor in Your City, FL. Licensed & insured, serving Random County homeowners with honest work and fair prices.',
   },
   serviceArea: {
-    title: 'Service Area | Insulation in Jackson County & NW Florida',
+    title: 'Service Area | Insulation in Random County & NW Florida',
     description:
-      'A Plus Insulation serves Marianna, Sneads, Graceville, Chipley, Bonifay, Cottondale, Grand Ridge, Malone & the NW Florida Panhandle. Free estimates.',
+      'A Plus Insulation serves Your City, Sandy Creek, Grayson, Chandler, Brookhaven, Cottonwood, Grand River, Melrose & the NW Florida Panhandle. Free estimates.',
   },
   contact: {
-    title: 'Free Insulation Estimate | A Plus Insulation Marianna FL',
+    title: 'Free Insulation Estimate | A Plus Insulation Your City FL',
     description:
-      'Get a free insulation estimate in Marianna, FL. Call A Plus Insulation at (850) 209-2636 or send a message — we serve all of Jackson County.',
+      'Get a free insulation estimate in Your City, FL. Call A Plus Insulation at (850) 555-0100 or send a message — we serve all of Random County.',
   },
 } as const;
