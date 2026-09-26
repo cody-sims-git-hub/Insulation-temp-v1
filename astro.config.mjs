@@ -9,9 +9,9 @@ import tailwindcss from '@tailwindcss/vite';
 // The one dynamic path (lead capture) posts to an endpoint, not a rendered page.
 export default defineConfig({
   // `site` drives canonical + Open Graph / share previews, so it must match
-  // where the site is actually served. It currently lives on the aplus preview
-  // subdomain; repoint this when it goes live on its own domain.
-  site: 'https://aplus.simsdigitalpartners.com',
+  // where the site is actually served: the insulation-demo portfolio subdomain
+  // on Cloudflare (wrangler.jsonc). Repoint both if it moves to its own domain.
+  site: 'https://insulation-demo.simsdigitalpartners.com',
   output: 'static',
   // Hide the Astro dev toolbar (the floating pill in dev).
   devToolbar: { enabled: false },
